@@ -10,6 +10,8 @@ export type FloraFlow = {
 export type FlowMetaData = {
 	health: Health;
 	systemDiagramUrl?: string;
+	runbookUrl?: string;
+	contactSlackChannel?: string;
 };
 export type Upstream = {
 	id: string;

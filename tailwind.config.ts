@@ -18,7 +18,7 @@ export default {
 			pattern: /bg-(primary|tertiary|red)-500\/30/,
 		},
 		{
-			pattern: /text-(primary|tertiary|red)-(200|500)/,
+			pattern: /text-(primary|tertiary|warning|red)-(500|700)/,
 		},
 	],
 	theme: {

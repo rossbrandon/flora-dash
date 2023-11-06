@@ -53,7 +53,7 @@
 	<section class="p-4 text-left h-48">
 		<h6 class="h6">Status</h6>
 		<h2 class="h2 text-{statusColor}-500">{statusText}</h2>
-		<div class="text-{statusColor}-200">{statusSubText}</div>
+		<div class="text-{statusColor}-700">{statusSubText}</div>
 	</section>
 	<hr class="opacity-50 m-3" />
 	<section class="p-4 mb-5 text-left h-32">
