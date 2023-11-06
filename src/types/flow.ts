@@ -1,11 +1,15 @@
+export type Flora = {
+	flows: FloraFlow[];
+};
 export type FloraFlow = {
-	tenant: Tenant;
+	meta: FlowMetaData;
 	upstream: Upstream;
 	downstreams: Downstream[];
+	tenant?: Tenant;
 };
-export type Tenant = {
-	id: string;
-	name: string;
+export type FlowMetaData = {
+	health: Health;
+	systemDiagramUrl?: string;
 };
 export type Upstream = {
 	id: string;
@@ -26,8 +30,17 @@ export type LastReceived = {
 	id: string;
 	timestamp: Date;
 };
+export type Tenant = {
+	id: string;
+	name: string;
+};
 export enum Status {
 	FAILED = 1,
 	IN_PROGRESS = 2,
 	SUCCESSFUL = 3,
+}
+export enum Health {
+	UNHEALTHY = 1,
+	INVESTIGATION_NEEDED = 2,
+	HEALTHY = 3,
 }

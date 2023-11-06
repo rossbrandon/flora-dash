@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { ProgressBar, ConicGradient } from '@skeletonlabs/skeleton';
 	import type { ConicStop } from '@skeletonlabs/skeleton';
-	import { Status, type Downstream } from '../types/flow.js';
+	import { Status, type Downstream } from '../../types/flow.js';
 
+	export let upstreamId: string;
 	export let downstreamData: Downstream;
 
 	const stops: ConicStop[] = [
@@ -45,8 +46,8 @@
 		}
 	};
 
-	const getStatusText = () => {
-		switch (getStatus()) {
+	const getStatusText = (status: Status) => {
+		switch (status) {
 			case Status.SUCCESSFUL:
 				return 'Success';
 			case Status.IN_PROGRESS:
@@ -58,8 +59,8 @@
 		}
 	};
 
-	const getStatusColor = () => {
-		switch (getStatus()) {
+	const getStatusColor = (status: Status) => {
+		switch (status) {
 			case Status.SUCCESSFUL:
 				return 'primary';
 			case Status.IN_PROGRESS:
@@ -70,13 +71,17 @@
 				return 'red';
 		}
 	};
+
+	const status = getStatus();
+	const statusText = getStatusText(status);
+	const statusColor = getStatusColor(status);
 </script>
 
 <div class="card">
 	<header class="card-header">{downstreamData.name}</header>
 	<section class="p-4 text-left">
 		<h6 class="h6">Status</h6>
-		<h2 class="h2 text-{getStatusColor()}-500">{getStatusText()}</h2>
+		<h2 class="h2 text-{statusColor}-500">{statusText}</h2>
 	</section>
 	<section class="p-4 text-left">
 		<h6 class="h6">Last Document Received</h6>
@@ -95,14 +100,14 @@
 			value={downstreamData.received}
 			max={downstreamData.expected}
 			height="h-3"
-			meter="bg-{getStatusColor()}-500"
-			track="bg-{getStatusColor()}-500/30"
+			meter="bg-{statusColor}-500"
+			track="bg-{statusColor}-500/30"
 		/>
 		<span>{downstreamData.received} / {downstreamData.expected}</span>
 		<ConicGradient {stops} legend class="mt-5" />
 	</section>
 	<footer class="card-footer">
 		<hr class="opacity-50 my-5" />
-		<a href="/{downstreamData.id}">Details &#8594;</a>
+		<a href="/{upstreamId}/{downstreamData.id}">Details &#8594;</a>
 	</footer>
 </div>
