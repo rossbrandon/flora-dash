@@ -56,7 +56,7 @@
 		<div class="text-{statusColor}-700">{statusSubText}</div>
 	</section>
 	<hr class="opacity-50 m-3" />
-	<section class="p-4 mb-5 text-left h-32">
+	<section class="p-4 mb-5 text-left h-40">
 		<div><strong>Total Documents: </strong>{data.upstream.total}</div>
 		<div><strong>Documents in Error: </strong>{data.upstream.inError}</div>
 		<br />
@@ -69,6 +69,32 @@
 				<span>System diagram not found... </span><a
 					class="anchor"
 					href="https://excalidraw.com"
+					target="_blank">Add one!</a
+				>
+			</div>
+		{/if}
+		{#if data.meta.runbookUrl}
+			<div>
+				<a class="anchor" href={data.meta.runbookUrl} target="_blank">Runbook</a>
+			</div>
+		{:else}
+			<div>
+				<span>Runbook not found... </span><a
+					class="anchor"
+					href="https://example.com/runbook"
+					target="_blank">Add one!</a
+				>
+			</div>
+		{/if}
+		{#if data.meta.contactSlackChannel}
+			<div>
+				<a class="anchor" href={data.meta.contactSlackChannel} target="_blank">Slack Channel</a>
+			</div>
+		{:else}
+			<div>
+				<span>Slack channel not found... </span><a
+					class="anchor"
+					href="https://example.com/slack"
 					target="_blank">Add one!</a
 				>
 			</div>

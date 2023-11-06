@@ -6,6 +6,8 @@ export const flowData: Flora = {
 			meta: {
 				health: Health.INVESTIGATION_NEEDED,
 				systemDiagramUrl: 'https://excalidraw.com',
+				runbookUrl: 'https://example.com/runbook',
+				contactSlackChannel: 'https://example.com/slack#upstreamASupport,',
 			},
 			upstream: {
 				id: 'upstreamA',
@@ -55,6 +57,7 @@ export const flowData: Flora = {
 		{
 			meta: {
 				health: Health.HEALTHY,
+				contactSlackChannel: 'https://example.com/slack#upstreamBSupport,',
 			},
 			upstream: {
 				id: 'upstreamB',
