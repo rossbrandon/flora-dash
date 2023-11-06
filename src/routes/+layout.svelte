@@ -6,6 +6,8 @@
 	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
 	import { storePopup } from '@skeletonlabs/skeleton';
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
+
+	export let data;
 </script>
 
 <!-- App Shell -->
@@ -14,7 +16,7 @@
 		<!-- App Bar -->
 		<AppBar>
 			<svelte:fragment slot="lead">
-				<strong class="text-xl">Data Flora</strong>
+				<a href="/"><strong class="text-xl">Data Flora</strong></a>
 			</svelte:fragment>
 			<svelte:fragment slot="default">
 				<input
@@ -25,9 +27,13 @@
 				/>
 			</svelte:fragment>
 			<svelte:fragment slot="headline">
-				<span>Upstream A</span>
-				<span class="text-xl mx-2">::</span>
-				<span>Acme</span>
+				<ol class="breadcrumb">
+					<li class="crumb"><a class="anchor" href="/">{data.flowData.upstream.name}</a></li>
+					<li class="crumb-separator" aria-hidden>&rsaquo;</li>
+					<li class="crumb"><a class="anchor" href="/">{data.flowData.tenant.name}</a></li>
+					<li class="crumb-separator" aria-hidden>&rsaquo;</li>
+					<li>Overview</li>
+				</ol>
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
 				<LightSwitch />
