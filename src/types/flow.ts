@@ -27,6 +27,7 @@ export type Downstream = {
 	missing: number;
 	inError: number;
 	lastReceived: LastReceived;
+	meta: FlowMetaData;
 };
 export type LastReceived = {
 	id: string;
