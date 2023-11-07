@@ -1,4 +1,4 @@
-import { flowData } from '../data/mock';
+import { flowData } from '../data/flowData';
 
 export function load() {
 	return { flowData };

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Health, type FloraFlow } from '../types/flow';
+	import { Health, type FloraFlow } from '../../../types/flow';
 
 	export let data: FloraFlow;
 

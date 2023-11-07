@@ -1,6 +1,6 @@
 import { error } from '@sveltejs/kit';
-import { flowData } from '../../../data/mock';
-import { errorDetails } from '../../../data/errorDetail';
+import { flowData } from '../../../data/flowData';
+import { errorDetail } from '../../../data/errorDetail';
 
 export function load({ params }) {
 	const flowIndex = flowData.flows.findIndex((flow) => flow.upstream.id === params.upstream);
@@ -11,7 +11,7 @@ export function load({ params }) {
 
 	if (!downstreamData) throw error(404);
 
-	const errorData = errorDetails.find(
+	const errorData = errorDetail.find(
 		(flow) => flow.upstreamId === params.upstream && flow.downstreamId === params.downstream
 	);
 

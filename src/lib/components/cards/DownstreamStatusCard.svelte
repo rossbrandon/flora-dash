@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { ProgressBar, ConicGradient } from '@skeletonlabs/skeleton';
 	import type { ConicStop } from '@skeletonlabs/skeleton';
-	import { Status, type Downstream } from '../../types/flow.js';
+	import { Status, type Downstream } from '../../../types/flow.js';
 
 	export let upstreamId: string;
 	export let downstreamData: Downstream;

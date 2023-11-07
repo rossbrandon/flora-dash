@@ -24,7 +24,7 @@ const generateErrors = (
 	return errors;
 };
 
-export const errorDetails: FloraError[] = [
+export const errorDetail: FloraError[] = [
 	{
 		upstreamId: 'contentIngest',
 		downstreamId: 'imageAnalyzer',

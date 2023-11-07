@@ -74,7 +74,7 @@ export const flowData: Flora = {
 					inError: 350,
 					lastReceived: {
 						id: faker.string.uuid(),
-						timestamp: faker.date.recent({ days: 1 }),
+						timestamp: faker.date.recent({ days: 2 }),
 					},
 					meta: {
 						health: Health.UNHEALTHY,
