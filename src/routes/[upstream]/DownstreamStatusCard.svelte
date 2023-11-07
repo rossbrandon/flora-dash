@@ -78,7 +78,9 @@
 </script>
 
 <div class="card">
-	<header class="card-header">{downstreamData.name}</header>
+	<header class="card-header">
+		<span class="h4">{downstreamData.name}</span>
+	</header>
 	<section class="p-4 text-left">
 		<h6 class="h6">Status</h6>
 		<h2 class="h2 text-{statusColor}-500">{statusText}</h2>

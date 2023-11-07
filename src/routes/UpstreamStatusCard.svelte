@@ -21,7 +21,7 @@
 			case Health.HEALTHY:
 				return 'All data flows are within acceptable limits';
 			case Health.INVESTIGATION_NEEDED:
-				return 'At least one data flow falls below acceptable thresholds';
+				return 'One or more data flows fall below acceptable thresholds';
 			case Health.UNHEALTHY:
 				return 'One or more data flows are unhealthy';
 			default:
@@ -48,15 +48,18 @@
 	const statusColor = getStatusColor(health);
 </script>
 
-<div class="card w-3/5">
-	<header class="card-header">{data.upstream.name}</header>
-	<section class="p-4 text-left h-48">
+<div class="card w-3/5 flex flex-col justify-between">
+	<header class="card-header">
+		<span class="h4">{data.upstream.name}</span>
+	</header>
+	<section class="p-4 text-left">
 		<h6 class="h6">Status</h6>
-		<h2 class="h2 text-{statusColor}-500">{statusText}</h2>
+		<h3 class="h3 text-{statusColor}-500">{statusText}</h3>
 		<div class="mt-2 text-{statusColor}-700">{statusSubText}</div>
 	</section>
 	<hr class="opacity-50 m-3" />
-	<section class="p-4 mb-5 text-left h-40">
+	<section class="p-4 text-left">
+		<div class="mb-3 text-center"><strong>System Info</strong></div>
 		<div><strong>Total Documents: </strong>{data.upstream.total}</div>
 		<div><strong>Documents in Error: </strong>{data.upstream.inError}</div>
 		<br />
@@ -99,22 +102,19 @@
 				>
 			</div>
 		{/if}
-	</section>
-	<hr class="opacity-50 m-3" />
-	<section class="mx-10 my-5">
-		<h6 class="h6 mb-3">Downstreams</h6>
+		<div class="mt-8 mb-3 text-center"><strong>Downstreams</strong></div>
 		{#each data.downstreams as downstream}
 			<div class="text-left">
 				<span>{downstream.name}</span>
-				<span class="px-8">--</span>
+				<span class="px-2">--</span>
 				<span class="text-{getStatusColor(downstream.meta.health)}-500">
 					{getStatusText(downstream.meta.health)}
 				</span>
 			</div>
 		{/each}
 	</section>
+	<hr class="opacity-50 m-5" />
 	<footer class="card-footer">
-		<hr class="opacity-50 my-5" />
 		<a href="/{data.upstream.id}">Overview &#8594;</a>
 	</footer>
 </div>

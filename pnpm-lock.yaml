@@ -10,6 +10,9 @@ dependencies:
     version: 1.5.3
 
 devDependencies:
+  '@faker-js/faker':
+    specifier: ^8.2.0
+    version: 8.2.0
   '@skeletonlabs/skeleton':
     specifier: 2.4.0
     version: 2.4.0(svelte@4.2.2)
@@ -333,6 +336,11 @@ packages:
   /@eslint/js@8.53.0:
     resolution: {integrity: sha512-Kn7K8dx/5U6+cT1yEhpX1w4PCSg0M+XyRILPgvwcEBjerFWCwQj5sbr3/VmxqV0JGHCBCzyd6LxypEuehypY1w==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    dev: true
+
+  /@faker-js/faker@8.2.0:
+    resolution: {integrity: sha512-VacmzZqVxdWdf9y64lDOMZNDMM/FQdtM9IsaOPKOm2suYwEatb8VkdHqOzXcDnZbk7YDE2BmsJmy/2Hmkn563g==}
+    engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0, npm: '>=6.14.13'}
     dev: true
 
   /@fastify/busboy@2.0.0:
