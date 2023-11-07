@@ -83,10 +83,11 @@
 	</header>
 	<section class="p-4 text-left">
 		<h6 class="h6">Status</h6>
-		<h2 class="h2 text-{statusColor}-500">{statusText}</h2>
+		<h3 class="h3 text-{statusColor}-500">{statusText}</h3>
 	</section>
+	<hr class="opacity-50 m-3" />
 	<section class="p-4 text-left">
-		<h6 class="h6">Last Document Received</h6>
+		<div class="mb-3"><strong>Last Document Received</strong></div>
 		<div>
 			<strong>ID: </strong>
 			{downstreamData.lastReceived.id}
@@ -95,9 +96,9 @@
 			<strong>Timestamp: </strong>
 			{downstreamData.lastReceived.timestamp.toLocaleString()}
 		</div>
-		<hr class="opacity-50 m-3" />
 	</section>
-	<section class="mx-10 mb-5">
+	<hr class="opacity-50 m-3" />
+	<section class="mx-10 mt-8 mb-5">
 		<ProgressBar
 			value={downstreamData.received}
 			max={downstreamData.expected}
@@ -108,8 +109,8 @@
 		<span>{downstreamData.received} / {downstreamData.expected}</span>
 		<ConicGradient {stops} legend class="mt-5" />
 	</section>
+	<hr class="opacity-50 m-5" />
 	<footer class="card-footer">
-		<hr class="opacity-50 my-5" />
 		<a href="/{upstreamId}/{downstreamData.id}">Details &#8594;</a>
 	</footer>
 </div>

@@ -59,7 +59,7 @@
 	</section>
 	<hr class="opacity-50 m-3" />
 	<section class="p-4 text-left">
-		<div class="mb-3 text-center"><strong>System Info</strong></div>
+		<div class="mb-3"><strong>System Info</strong></div>
 		<div><strong>Total Documents: </strong>{data.upstream.total}</div>
 		<div><strong>Documents in Error: </strong>{data.upstream.inError}</div>
 		<br />
@@ -102,7 +102,7 @@
 				>
 			</div>
 		{/if}
-		<div class="mt-8 mb-3 text-center"><strong>Downstreams</strong></div>
+		<div class="mt-8 mb-3"><strong>Downstreams</strong></div>
 		{#each data.downstreams as downstream}
 			<div class="text-left">
 				<span>{downstream.name}</span>
