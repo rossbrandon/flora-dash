@@ -9,7 +9,6 @@
 		return data.clients.filter((c) => {
 			const searchText = searchFilter.split(' ');
 			return searchText.every((item) => {
-				console.log(c.type.toString() === item);
 				return (
 					c.id.toLowerCase().includes(item.toLowerCase()) ||
 					c.name.toLowerCase().includes(item.toLowerCase()) ||
