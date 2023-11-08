@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { currentClient } from '../../../routes/clientStore';
 	import { Health, type FloraFlow } from '../../../types/flow';
 
 	export let data: FloraFlow;
@@ -17,15 +18,20 @@
 	};
 
 	const getStatusSubText = (health: Health) => {
+		const unhealthyCount: number | string = data.downstreams.filter(
+			(d) => d.health === Health.INVESTIGATION_NEEDED || d.health === Health.UNHEALTHY
+		).length;
+		const count = unhealthyCount === data.downstreams.length ? 'All' : unhealthyCount;
+		const plural = count != 1;
 		switch (health) {
 			case Health.HEALTHY:
 				return 'All data flows are within acceptable limits';
 			case Health.INVESTIGATION_NEEDED:
-				return 'One or more data flows fall below acceptable thresholds';
+				return `${count} data ${plural ? 'flows fall' : 'flow falls'} below acceptable thresholds`;
 			case Health.UNHEALTHY:
-				return 'One or more data flows are unhealthy';
+				return `${count} data ${plural ? 'flows' : 'flow'} are unhealthy`;
 			default:
-				return 'One or more data flows are unhealthy';
+				return 'Data flow health is unknown';
 		}
 	};
 
@@ -42,7 +48,7 @@
 		}
 	};
 
-	const health = data.meta.health;
+	const health = data.health;
 	const statusText = getStatusText(health);
 	const statusSubText = getStatusSubText(health);
 	const statusColor = getStatusColor(health);
@@ -63,7 +69,7 @@
 		<div><strong>Total Documents: </strong>{data.upstream.total}</div>
 		<div><strong>Documents in Error: </strong>{data.upstream.inError}</div>
 		<br />
-		{#if data.meta.systemDiagramUrl}
+		{#if data.meta && data.meta?.systemDiagramUrl}
 			<div>
 				<a class="anchor" href={data.meta.systemDiagramUrl} target="_blank">System Diagram</a>
 			</div>
@@ -76,7 +82,7 @@
 				>
 			</div>
 		{/if}
-		{#if data.meta.runbookUrl}
+		{#if data.meta && data.meta?.runbookUrl}
 			<div>
 				<a class="anchor" href={data.meta.runbookUrl} target="_blank">Runbook</a>
 			</div>
@@ -89,7 +95,7 @@
 				>
 			</div>
 		{/if}
-		{#if data.meta.contactSlackChannel}
+		{#if data.meta && data.meta?.contactSlackChannel}
 			<div>
 				<a class="anchor" href={data.meta.contactSlackChannel} target="_blank">Slack Channel</a>
 			</div>
@@ -107,14 +113,14 @@
 			<div class="text-left">
 				<span>{downstream.name}</span>
 				<span class="px-2">--</span>
-				<span class="text-{getStatusColor(downstream.meta.health)}-500">
-					{getStatusText(downstream.meta.health)}
+				<span class="text-{getStatusColor(downstream.health)}-500">
+					{getStatusText(downstream.health)}
 				</span>
 			</div>
 		{/each}
 	</section>
 	<hr class="opacity-50 m-5" />
 	<footer class="card-footer">
-		<a href="/{data.upstream.id}">Overview &#8594;</a>
+		<a href="/{$currentClient.id}/{data.upstream.id}">Overview &#8594;</a>
 	</footer>
 </div>

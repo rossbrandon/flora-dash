@@ -1,5 +1,5 @@
 import { error } from '@sveltejs/kit';
-import { flowData } from '../../data/flowData';
+import { flowData } from '../../../data/flowData';
 
 export function load({ params }) {
 	const upstreamData = flowData.flows.find((flow) => flow.upstream.id === params.upstream);

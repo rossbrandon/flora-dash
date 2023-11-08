@@ -1,6 +1,6 @@
 import { error } from '@sveltejs/kit';
-import { flowData } from '../../../data/flowData';
-import { errorDetail } from '../../../data/errorDetail';
+import { flowData } from '../../../../data/flowData';
+import { errorDetail } from '../../../../data/errorDetail';
 
 export function load({ params }) {
 	const flowIndex = flowData.flows.findIndex((flow) => flow.upstream.id === params.upstream);

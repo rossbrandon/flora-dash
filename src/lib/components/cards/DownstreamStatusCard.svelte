@@ -2,6 +2,7 @@
 	import { ProgressBar, ConicGradient } from '@skeletonlabs/skeleton';
 	import type { ConicStop } from '@skeletonlabs/skeleton';
 	import { Status, type Downstream } from '../../../types/flow.js';
+	import { currentClient } from '../../../routes/clientStore.js';
 
 	export let upstreamId: string;
 	export let downstreamData: Downstream;
@@ -111,6 +112,6 @@
 	</section>
 	<hr class="opacity-50 m-5" />
 	<footer class="card-footer">
-		<a href="/{upstreamId}/{downstreamData.id}">Details &#8594;</a>
+		<a href="/{$currentClient.id}/{upstreamId}/{downstreamData.id}">Details &#8594;</a>
 	</footer>
 </div>

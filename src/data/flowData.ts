@@ -4,20 +4,19 @@ import { Health, type Flora } from '../types/flow';
 export const flowData: Flora = {
 	flows: [
 		{
+			health: Health.INVESTIGATION_NEEDED,
 			meta: {
-				health: Health.INVESTIGATION_NEEDED,
 				systemDiagramUrl: 'https://excalidraw.com',
 				runbookUrl: faker.internet.url() + '/runbook',
 				contactSlackChannel: faker.internet.url() + '/slack#upstreamASupport,',
 			},
+			clientId: 'internal',
 			upstream: {
 				id: 'contentIngest',
 				name: 'Content Ingestion',
 				total: 1750000,
 				inError: 0,
-				meta: {
-					health: Health.HEALTHY,
-				},
+				health: Health.HEALTHY,
 			},
 			downstreams: [
 				{
@@ -31,9 +30,7 @@ export const flowData: Flora = {
 						id: faker.string.uuid(),
 						timestamp: faker.date.recent({ days: 3 }),
 					},
-					meta: {
-						health: Health.HEALTHY,
-					},
+					health: Health.HEALTHY,
 				},
 				{
 					id: 'videoAnalyzer',
@@ -46,9 +43,7 @@ export const flowData: Flora = {
 						id: faker.string.uuid(),
 						timestamp: faker.date.recent({ days: 5 }),
 					},
-					meta: {
-						health: Health.HEALTHY,
-					},
+					health: Health.HEALTHY,
 				},
 				{
 					id: 'fileStorage',
@@ -61,9 +56,7 @@ export const flowData: Flora = {
 						id: faker.string.uuid(),
 						timestamp: new Date(Date.now() - 7 * 60 * 1000), // 7 min ago
 					},
-					meta: {
-						health: Health.HEALTHY,
-					},
+					health: Health.HEALTHY,
 				},
 				{
 					id: 'metadataAnalyzer',
@@ -76,26 +69,23 @@ export const flowData: Flora = {
 						id: faker.string.uuid(),
 						timestamp: faker.date.recent({ days: 2 }),
 					},
-					meta: {
-						health: Health.UNHEALTHY,
-					},
+					health: Health.INVESTIGATION_NEEDED,
 				},
 			],
 		},
 		{
+			health: Health.HEALTHY,
 			meta: {
-				health: Health.HEALTHY,
 				runbookUrl: faker.internet.url() + '/runbook',
 				contactSlackChannel: faker.internet.url() + '/slack#upstreamASupport,',
 			},
+			clientId: 'internal',
 			upstream: {
 				id: 'eventCollector',
 				name: 'Event Collector',
 				total: 580000,
 				inError: 0,
-				meta: {
-					health: Health.HEALTHY,
-				},
+				health: Health.HEALTHY,
 			},
 			downstreams: [
 				{
@@ -109,9 +99,7 @@ export const flowData: Flora = {
 						id: faker.string.uuid(),
 						timestamp: new Date(Date.now() - 5 * 60 * 1000), // 5 min ago
 					},
-					meta: {
-						health: Health.HEALTHY,
-					},
+					health: Health.HEALTHY,
 				},
 				{
 					id: 'recommender',
@@ -124,9 +112,7 @@ export const flowData: Flora = {
 						id: faker.string.uuid(),
 						timestamp: faker.date.recent({ days: 1 }),
 					},
-					meta: {
-						health: Health.HEALTHY,
-					},
+					health: Health.HEALTHY,
 				},
 				{
 					id: 'adCreator',
@@ -139,27 +125,24 @@ export const flowData: Flora = {
 						id: faker.string.uuid(),
 						timestamp: faker.date.recent({ days: 1 }),
 					},
-					meta: {
-						health: Health.HEALTHY,
-					},
+					health: Health.HEALTHY,
 				},
 			],
 		},
 		{
+			health: Health.UNHEALTHY,
 			meta: {
-				health: Health.UNHEALTHY,
 				systemDiagramUrl: 'https://excalidraw.com',
 				runbookUrl: faker.internet.url() + '/runbook',
 				contactSlackChannel: faker.internet.url() + '/slack#upstreamASupport,',
 			},
+			clientId: 'internal',
 			upstream: {
 				id: 'userManager',
 				name: 'User Manager',
 				total: 275000,
 				inError: 50000,
-				meta: {
-					health: Health.UNHEALTHY,
-				},
+				health: Health.UNHEALTHY,
 			},
 			downstreams: [
 				{
@@ -173,9 +156,7 @@ export const flowData: Flora = {
 						id: faker.string.uuid(),
 						timestamp: faker.date.recent({ days: 10 }),
 					},
-					meta: {
-						health: Health.UNHEALTHY,
-					},
+					health: Health.UNHEALTHY,
 				},
 				{
 					id: 'profileService',
@@ -188,9 +169,7 @@ export const flowData: Flora = {
 						id: faker.string.uuid(),
 						timestamp: faker.date.recent({ days: 10 }),
 					},
-					meta: {
-						health: Health.UNHEALTHY,
-					},
+					health: Health.UNHEALTHY,
 				},
 			],
 		},

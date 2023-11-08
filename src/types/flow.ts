@@ -3,14 +3,15 @@ export type Flora = {
 };
 
 export type FloraFlow = {
-	meta: FlowMetaData;
+	clientId: string;
 	upstream: Upstream;
 	downstreams: Downstream[];
-	tenant?: Tenant;
+	health: Health;
+	meta?: FlowMetaData;
 };
 
 export type FlowMetaData = {
-	health: Health;
+	description?: string;
 	systemDiagramUrl?: string;
 	runbookUrl?: string;
 	contactSlackChannel?: string;
@@ -21,7 +22,7 @@ export type Upstream = {
 	name: string;
 	total: number;
 	inError: number;
-	meta: FlowMetaData;
+	health: Health;
 };
 
 export type Downstream = {
@@ -32,17 +33,12 @@ export type Downstream = {
 	missing: number;
 	inError: number;
 	lastReceived: LastReceived;
-	meta: FlowMetaData;
+	health: Health;
 };
 
 export type LastReceived = {
 	id: string;
 	timestamp: Date;
-};
-
-export type Tenant = {
-	id: string;
-	name: string;
 };
 
 export enum Status {
