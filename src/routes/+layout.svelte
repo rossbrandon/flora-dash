@@ -1,14 +1,11 @@
 <script lang="ts">
 	import '../app.postcss';
 	import { AppShell, AppBar, LightSwitch } from '@skeletonlabs/skeleton';
-
-	// Floating UI for Popups
-	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
 	import { storePopup } from '@skeletonlabs/skeleton';
-	import ClientSearch from '$lib/components/search/ClientSearch.svelte';
-	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
+	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
+	import { searchFilter } from './searchStore';
 
-	export let data;
+	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 </script>
 
 <AppShell>
@@ -18,7 +15,13 @@
 				<a href="/"><strong class="text-xl">Data Flora</strong></a>
 			</svelte:fragment>
 			<svelte:fragment slot="default">
-				<ClientSearch clients={data.clients} />
+				<input
+					class="input w-full"
+					title="Data Flow Search"
+					type="search"
+					placeholder="Search for a data flow..."
+					bind:value={$searchFilter}
+				/>
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
 				<LightSwitch />

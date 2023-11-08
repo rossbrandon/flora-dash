@@ -3,7 +3,8 @@
 	import { Autocomplete, popup } from '@skeletonlabs/skeleton';
 	import type { AutocompleteOption, PopupSettings } from '@skeletonlabs/skeleton';
 	import type { Client } from '../../../types/client';
-	import { currentClient, defaultClient } from '../../../routes/clientStore';
+	import { currentClient } from '../../../routes/clientStore';
+	import { searchFilter } from '../../../routes/searchStore';
 
 	export let clients: Client[];
 
@@ -33,10 +34,10 @@
 	const options: AutocompleteOption<string>[] = getOptions();
 
 	function onSelect(event: CustomEvent<AutocompleteOption<string, Client>>): void {
-		const client: Client = event.detail.meta ?? defaultClient;
-		searchInput = client.name;
+		const client: Client | undefined = event.detail.meta;
+		searchInput = client?.name ?? '';
 		currentClient.set(client);
-		goto(`/${client.id}`);
+		goto(`/${client?.id ?? ''}`);
 	}
 </script>
 
@@ -45,7 +46,7 @@
 	title="Data Flow Search"
 	type="search"
 	placeholder="Search for a data flow..."
-	bind:value={searchInput}
+	bind:value={$searchFilter}
 	use:popup={popupSettings}
 />
 

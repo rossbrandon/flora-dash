@@ -23,15 +23,15 @@ export type FlowError = {
 };
 
 export enum ErrorStatus {
-	UNKNOWN = 0,
-	IN_ERROR = 1,
-	MISSING = 2,
-	FOUND = 3,
+	UNKNOWN = 'Unknown',
+	IN_ERROR = 'In Error',
+	MISSING = 'Missing',
+	FOUND = 'Found',
 }
 
 export enum ErrorType {
-	UNKNOWN = 0,
-	NETWORK_ERROR = 1,
-	INVALID_DATA = 2,
-	MISSING_DATA = 3,
+	UNKNOWN = 'Unknown',
+	NETWORK_ERROR = 'Network Error',
+	INVALID_DATA = 'Invalid Data',
+	MISSING_DATA = 'Missing Data',
 }

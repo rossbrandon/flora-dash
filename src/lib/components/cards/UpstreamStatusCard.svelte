@@ -4,19 +4,6 @@
 
 	export let data: FloraFlow;
 
-	const getStatusText = (health: Health) => {
-		switch (health) {
-			case Health.HEALTHY:
-				return 'Healthy';
-			case Health.INVESTIGATION_NEEDED:
-				return 'Investigation Needed';
-			case Health.UNHEALTHY:
-				return 'Unhealthy';
-			default:
-				return 'Unhealthy';
-		}
-	};
-
 	const getStatusSubText = (health: Health) => {
 		const unhealthyCount: number | string = data.downstreams.filter(
 			(d) => d.health === Health.INVESTIGATION_NEEDED || d.health === Health.UNHEALTHY
@@ -49,18 +36,17 @@
 	};
 
 	const health = data.health;
-	const statusText = getStatusText(health);
 	const statusSubText = getStatusSubText(health);
 	const statusColor = getStatusColor(health);
 </script>
 
-<div class="card w-3/5 flex flex-col justify-between">
+<div class="card card-hover flex flex-col justify-between w-96 mb-5">
 	<header class="card-header">
 		<span class="h4">{data.upstream.name}</span>
 	</header>
 	<section class="p-4 text-left">
 		<h6 class="h6">Status</h6>
-		<h3 class="h3 text-{statusColor}-500">{statusText}</h3>
+		<h3 class="h3 text-{statusColor}-500">{data.health.toString()}</h3>
 		<div class="mt-2 text-{statusColor}-700">{statusSubText}</div>
 	</section>
 	<hr class="opacity-50 m-3" />
@@ -114,13 +100,13 @@
 				<span>{downstream.name}</span>
 				<span class="px-2">--</span>
 				<span class="text-{getStatusColor(downstream.health)}-500">
-					{getStatusText(downstream.health)}
+					{downstream.health.toString()}
 				</span>
 			</div>
 		{/each}
 	</section>
 	<hr class="opacity-50 m-5" />
 	<footer class="card-footer">
-		<a href="/{$currentClient.id}/{data.upstream.id}">Overview &#8594;</a>
+		<a href="/{$currentClient?.id}/{data.upstream.id}">Overview &#8594;</a>
 	</footer>
 </div>

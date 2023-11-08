@@ -42,15 +42,15 @@ export type LastReceived = {
 };
 
 export enum Status {
-	UNKNOWN = 0,
-	FAILED = 1,
-	IN_PROGRESS = 2,
-	SUCCESSFUL = 3,
+	UNKNOWN = 'Unknown',
+	FAILED = 'Failed',
+	IN_PROGRESS = 'In Progress',
+	SUCCESSFUL = 'Successful',
 }
 
 export enum Health {
-	UNKNOWN = 0,
-	UNHEALTHY = 1,
-	INVESTIGATION_NEEDED = 2,
-	HEALTHY = 3,
+	UNKNOWN = 'Unknown',
+	UNHEALTHY = 'Unhealthy',
+	INVESTIGATION_NEEDED = 'Investiation Needed',
+	HEALTHY = 'Healthy',
 }

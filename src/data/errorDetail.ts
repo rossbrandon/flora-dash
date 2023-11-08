@@ -90,7 +90,7 @@ export const errorDetail: FloraError[] = [
 	},
 	{
 		upstreamId: 'contentIngest',
-		downstreamId: 'metadataAnalyzer',
+		downstreamId: 'metadataStorage',
 		aggregates: [
 			{
 				type: ErrorType.INVALID_DATA,
@@ -110,9 +110,9 @@ export const errorDetail: FloraError[] = [
 		],
 		errors: generateErrors(
 			'contentIngest',
-			'metadataAnalyzer',
+			'metadataStorage',
 			ErrorType.NETWORK_ERROR,
-			'Could not connect to metadataAnalyzer service: http timeout (10s) reached',
+			'Could not connect to metadataStorage service: http timeout (10s) reached',
 			350
 		),
 	},

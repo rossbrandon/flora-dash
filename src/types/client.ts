@@ -2,11 +2,21 @@ export type Client = {
 	id: string;
 	name: string;
 	type: ClientType;
+	deviceType: DeviceType;
 	description?: string;
+	userAgent?: string;
 };
 
 export enum ClientType {
-	UNKNOWN = 0,
-	INTERNAL = 1,
-	EXTERNAL = 2,
+	UNKNOWN = 'Unknown',
+	INTERNAL = 'Internal',
+	EXTERNAL = 'External',
+}
+
+export enum DeviceType {
+	UNKNOWN = 'Unknown',
+	SYSTEM = 'System',
+	WEB = 'Web',
+	MOBILE = 'Mobile',
+	DESKTOP = 'Desktop',
 }

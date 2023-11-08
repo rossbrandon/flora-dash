@@ -10,7 +10,7 @@
 	<div class="app-bar-row-headline">
 		<ol class="breadcrumb">
 			<li class="crumb">
-				<a class="anchor" href="/{$currentClient.id}">{$currentClient.name}</a>
+				<a class="anchor" href="/{$currentClient?.id}">{$currentClient?.name}</a>
 			</li>
 			<li class="crumb-separator" aria-hidden>&rsaquo;</li>
 			<li class="crumb">Flows</li>

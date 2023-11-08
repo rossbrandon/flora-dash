@@ -47,19 +47,6 @@
 		}
 	};
 
-	const getStatusText = (status: Status) => {
-		switch (status) {
-			case Status.SUCCESSFUL:
-				return 'Success';
-			case Status.IN_PROGRESS:
-				return 'In Progress';
-			case Status.FAILED:
-				return 'Failed';
-			default:
-				return 'Failed';
-		}
-	};
-
 	const getStatusColor = (status: Status) => {
 		switch (status) {
 			case Status.SUCCESSFUL:
@@ -74,17 +61,16 @@
 	};
 
 	const status = getStatus();
-	const statusText = getStatusText(status);
 	const statusColor = getStatusColor(status);
 </script>
 
-<div class="card">
+<div class="card card-hover flex flex-col justify-between w-96 mb-5">
 	<header class="card-header">
 		<span class="h4">{downstreamData.name}</span>
 	</header>
 	<section class="p-4 text-left">
 		<h6 class="h6">Status</h6>
-		<h3 class="h3 text-{statusColor}-500">{statusText}</h3>
+		<h3 class="h3 text-{statusColor}-500">{status.toString()}</h3>
 	</section>
 	<hr class="opacity-50 m-3" />
 	<section class="p-4 text-left">
@@ -112,6 +98,6 @@
 	</section>
 	<hr class="opacity-50 m-5" />
 	<footer class="card-footer">
-		<a href="/{$currentClient.id}/{upstreamId}/{downstreamData.id}">Details &#8594;</a>
+		<a href="/{$currentClient?.id}/{upstreamId}/{downstreamData.id}">Details &#8594;</a>
 	</footer>
 </div>
