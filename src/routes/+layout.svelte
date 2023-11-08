@@ -1,11 +1,23 @@
 <script lang="ts">
 	import '../app.postcss';
+	import { page } from '$app/stores';
 	import { AppShell, AppBar, LightSwitch } from '@skeletonlabs/skeleton';
 	import { storePopup } from '@skeletonlabs/skeleton';
 	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
 	import { searchFilter } from './searchStore';
+	import { goto } from '$app/navigation';
+	// import ClientSearch from '$lib/components/search/ClientSearch.svelte';
+
+	export let data;
 
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
+
+	const handleClick = () => {
+		if ($page.route.id != '/') {
+			searchFilter.set('');
+			goto('/');
+		}
+	};
 </script>
 
 <AppShell>
@@ -21,7 +33,9 @@
 					type="search"
 					placeholder="Search for a data flow..."
 					bind:value={$searchFilter}
+					on:click={handleClick}
 				/>
+				<!-- <ClientSearch clients={data.clients} /> -->
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
 				<LightSwitch />

@@ -4,7 +4,6 @@
 	import type { AutocompleteOption, PopupSettings } from '@skeletonlabs/skeleton';
 	import type { Client } from '../../../types/client';
 	import { currentClient } from '../../../routes/clientStore';
-	import { searchFilter } from '../../../routes/searchStore';
 
 	export let clients: Client[];
 
@@ -46,7 +45,7 @@
 	title="Data Flow Search"
 	type="search"
 	placeholder="Search for a data flow..."
-	bind:value={$searchFilter}
+	bind:value={searchInput}
 	use:popup={popupSettings}
 />
 

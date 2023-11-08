@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { currentClient } from '../../../routes/clientStore';
+	import { searchFilter } from '../../../routes/searchStore';
 	import { type Client, ClientType, DeviceType } from '../../../types/client';
 
 	export let data: Client;
@@ -15,7 +16,12 @@
 		}
 	};
 
-	const clientColor = getClientColor(data.type);
+	$: clientColor = getClientColor(data.type);
+
+	const handleClick = () => {
+		currentClient.set(data);
+		searchFilter.set(data.name);
+	};
 </script>
 
 <div class="card card-hover flex flex-col justify-between w-96 mb-5">
@@ -37,6 +43,6 @@
 	</section>
 	<hr class="opacity-50 m-5" />
 	<footer class="card-footer">
-		<a href="/{data.id}" on:click={currentClient.set(data)}>Data Flows &#8594;</a>
+		<a href="/{data.id}" on:click={handleClick}>Data Flows &#8594;</a>
 	</footer>
 </div>
