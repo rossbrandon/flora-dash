@@ -59,7 +59,7 @@
 </script>
 
 {#if data.length}
-	<div class="flex justify-center">
+	<div class="flex justify-center mb-5">
 		<span class="h3">Recent Errors</span>
 	</div>
 	<div class="w-full space-y-4">

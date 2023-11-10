@@ -2,7 +2,7 @@
 	import { ProgressBar, ConicGradient } from '@skeletonlabs/skeleton';
 	import type { ConicStop } from '@skeletonlabs/skeleton';
 	import { Status, type Downstream } from '../../../types/flow.js';
-	import { currentClient } from '../../../routes/clientStore.js';
+	import { currentClient } from '../../../stores/client.js';
 
 	export let upstreamId: string;
 	export let downstreamData: Downstream;
@@ -64,24 +64,15 @@
 	const statusColor = getStatusColor(status);
 </script>
 
-<div class="card card-hover flex flex-col justify-between w-96 mb-5">
+<div class="card card-hover">
 	<header class="card-header">
 		<span class="h4">{downstreamData.name}</span>
 	</header>
 	<section class="p-4 text-left">
 		<h6 class="h6">Status</h6>
 		<h3 class="h3 text-{statusColor}-500">{status.toString()}</h3>
-	</section>
-	<hr class="opacity-50 m-3" />
-	<section class="p-4 text-left">
-		<div class="mb-3"><strong>Last Document Received</strong></div>
-		<div>
-			<strong>ID: </strong>
-			{downstreamData.lastReceived.id}
-		</div>
-		<div>
-			<strong>Timestamp: </strong>
-			{downstreamData.lastReceived.timestamp.toLocaleString()}
+		<div class="mt-5">
+			<strong>Last Received: </strong>{downstreamData.lastReceived.timestamp.toLocaleString()}
 		</div>
 	</section>
 	<hr class="opacity-50 m-3" />

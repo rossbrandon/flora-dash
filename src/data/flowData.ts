@@ -8,7 +8,7 @@ export const flowData: Flora = {
 			meta: {
 				systemDiagramUrl: 'https://excalidraw.com',
 				runbookUrl: faker.internet.url() + '/runbook',
-				contactSlackChannel: faker.internet.url() + '/slack#upstreamASupport,',
+				contactSlackChannel: faker.internet.url() + '/slack#contentIngestSupport,',
 			},
 			clientId: 'internal',
 			upstream: {
@@ -77,7 +77,7 @@ export const flowData: Flora = {
 			health: Health.HEALTHY,
 			meta: {
 				runbookUrl: faker.internet.url() + '/runbook',
-				contactSlackChannel: faker.internet.url() + '/slack#upstreamASupport,',
+				contactSlackChannel: faker.internet.url() + '/slack#contentIngestSupport,',
 			},
 			clientId: 'internal',
 			upstream: {
@@ -134,7 +134,7 @@ export const flowData: Flora = {
 			meta: {
 				systemDiagramUrl: 'https://excalidraw.com',
 				runbookUrl: faker.internet.url() + '/runbook',
-				contactSlackChannel: faker.internet.url() + '/slack#upstreamASupport,',
+				contactSlackChannel: faker.internet.url() + '/slack#contentIngestSupport,',
 			},
 			clientId: 'internal',
 			upstream: {

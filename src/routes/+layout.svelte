@@ -1,30 +1,45 @@
 <script lang="ts">
 	import '../app.postcss';
 	import { page } from '$app/stores';
-	import { AppShell, AppBar, LightSwitch } from '@skeletonlabs/skeleton';
-	import { storePopup } from '@skeletonlabs/skeleton';
+	import { AppShell, AppBar, LightSwitch, Modal } from '@skeletonlabs/skeleton';
+	import { storePopup, initializeStores } from '@skeletonlabs/skeleton';
 	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
-	import { searchFilter } from './searchStore';
 	import { goto } from '$app/navigation';
-	// import ClientSearch from '$lib/components/search/ClientSearch.svelte';
+	import Breadcrumbs from '$lib/components/navigation/Breadcrumbs.svelte';
+	import { currentClient } from '../stores/client';
+	import { currentUpstream } from '../stores/upstream';
+	import { currentDownstream } from '../stores/downstream';
+	import { searchFilter } from '../stores/search';
 
-	export let data;
-
+	// initialize skeleton popup and modals
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
+	initializeStores();
+
+	const resetState = () => {
+		searchFilter.set('');
+		currentClient.set(undefined);
+		currentUpstream.set(undefined);
+		currentDownstream.set(undefined);
+	};
 
 	const handleClick = () => {
 		if ($page.route.id != '/') {
-			searchFilter.set('');
+			resetState();
 			goto('/');
 		}
 	};
+
+	$: if ($page.route.id === '/') resetState();
 </script>
+
+<!-- Initialize skeleton modal -->
+<Modal />
 
 <AppShell>
 	<svelte:fragment slot="header">
 		<AppBar>
 			<svelte:fragment slot="lead">
-				<a href="/"><strong class="text-xl">Data Flora</strong></a>
+				<a href="/" on:click={handleClick}><strong class="text-xl">Data Flora</strong></a>
 			</svelte:fragment>
 			<svelte:fragment slot="default">
 				<input
@@ -35,7 +50,9 @@
 					bind:value={$searchFilter}
 					on:click={handleClick}
 				/>
-				<!-- <ClientSearch clients={data.clients} /> -->
+			</svelte:fragment>
+			<svelte:fragment slot="headline">
+				<Breadcrumbs />
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
 				<LightSwitch />

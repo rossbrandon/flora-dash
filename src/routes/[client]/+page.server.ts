@@ -6,7 +6,5 @@ export function load({ params }) {
 
 	if (!clientDataFlows) throw error(404);
 
-	return {
-		clientDataFlows,
-	};
+	return { clientDataFlows };
 }

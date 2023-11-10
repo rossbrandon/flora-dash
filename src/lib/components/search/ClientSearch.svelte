@@ -3,7 +3,7 @@
 	import { Autocomplete, popup } from '@skeletonlabs/skeleton';
 	import type { AutocompleteOption, PopupSettings } from '@skeletonlabs/skeleton';
 	import type { Client } from '../../../types/client';
-	import { currentClient } from '../../../routes/clientStore';
+	import { currentClient } from '../../../stores/client';
 
 	export let clients: Client[];
 
