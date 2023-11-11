@@ -2,6 +2,7 @@
 	import RecentErrorsTable from '$lib/components/tables/RecentErrorsTable.svelte';
 	import { currentDownstream } from '../../../../stores/downstream.js';
 	import { getModalStore, type ModalSettings } from '@skeletonlabs/skeleton';
+	import { ErrorType } from '../../../../types/errors.js';
 
 	export let data;
 
@@ -26,6 +27,10 @@
 			'Are you sure you know what you are doing?',
 		response: (r: boolean) => console.log('response:', r),
 	};
+
+	const invalidData = data.errorData?.aggregates.find((e) => e.type === ErrorType.INVALID_DATA);
+	const missingData = data.errorData?.aggregates.find((e) => e.type === ErrorType.MISSING_DATA);
+	const networkErrors = data.errorData?.aggregates.find((e) => e.type === ErrorType.NETWORK_ERROR);
 </script>
 
 <div class="grid grid-cols-4 m-5 gap-5">
@@ -101,7 +106,11 @@
 	<div class="col-span-4">
 		<hr />
 		<h3 class="h3 text-center m-5">Error Details</h3>
-		<span class="text-center">Error type chart TBD</span>
+		<div class="mb-10">
+			<div><strong>Invalid Data Errors: </strong>{invalidData?.count}</div>
+			<div><strong>Missing Data Errors: </strong>{missingData?.count}</div>
+			<div><strong>Network Errors: </strong>{networkErrors?.count}</div>
+		</div>
 		<RecentErrorsTable data={data.errorData?.errors ?? []} />
 	</div>
 </div>

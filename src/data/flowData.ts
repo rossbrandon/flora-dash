@@ -1,15 +1,24 @@
 import { faker } from '@faker-js/faker';
 import { Health, type Flora, type FloraFlow } from '../types/flow';
-import { getRandomEnum } from './utils';
 import { clients } from './clients';
 
-const generateDataFlows = (count: number): FloraFlow[] => {
+const determineHealth = (hasErrors: boolean, timestamp: Date): Health => {
+	const THREE_HOURS = 180 * 60 * 1000;
+	if (hasErrors && new Date().getTime() - timestamp.getTime() < THREE_HOURS) {
+		return Health.INVESTIGATION_NEEDED;
+	} else if (hasErrors) {
+		return Health.UNHEALTHY;
+	} else {
+		return Health.HEALTHY;
+	}
+};
+
+const generateDataFlows = (): FloraFlow[] => {
 	const flows: FloraFlow[] = [];
-	for (let i = 0; i < count; i++) {
-		const health = getRandomEnum(Health);
-		// remove the first 2 demo clients
-		const generatedClients = clients.slice(2);
-		const clientId = generatedClients[Math.floor(Math.random() * generatedClients.length)].id;
+	// remove the first 2 demo clients
+	const generatedClients = clients.slice(2);
+	for (let i = 0; i < generatedClients.length; i++) {
+		const clientId = generatedClients[i].id;
 		const hasErrors = Math.random() < 0.5;
 		const upstreamTotalCount = Math.floor(Math.random() * 150000);
 		const upstreamInError = Math.floor(Math.random() * upstreamTotalCount);
@@ -20,8 +29,16 @@ const generateDataFlows = (count: number): FloraFlow[] => {
 		const eventsReceived = hasErrors ? Math.floor(eventsExpected * 0.9) : eventsExpected;
 		const eventsMissing = hasErrors ? Math.floor(eventsExpected * 0.05) : 0;
 		const eventsInError = hasErrors ? Math.floor(eventsExpected * 0.05) : 0;
+		const contentTs = faker.date.recent({ days: 30 });
+		const eventTs = new Date(Date.now() - 5 * 60 * 1000); // 5 min ago
+		const contentHealth = determineHealth(hasErrors, contentTs);
+		const eventHealth = determineHealth(hasErrors, eventTs);
+		const overallHealth =
+			contentHealth === Health.HEALTHY && eventHealth === Health.HEALTHY
+				? Health.HEALTHY
+				: Health.UNHEALTHY;
 		const flow: FloraFlow = {
-			health,
+			health: overallHealth,
 			meta: {
 				systemDiagramUrl: 'https://excalidraw.com',
 				runbookUrl: faker.internet.url() + '/runbook',
@@ -33,7 +50,7 @@ const generateDataFlows = (count: number): FloraFlow[] => {
 				name: 'User Client',
 				total: upstreamTotalCount,
 				inError: upstreamInError,
-				health,
+				health: upstreamInError === 0 ? Health.HEALTHY : Health.UNHEALTHY,
 			},
 			downstreams: [
 				{
@@ -45,7 +62,7 @@ const generateDataFlows = (count: number): FloraFlow[] => {
 					inError: contentInError,
 					lastReceived: {
 						id: faker.string.uuid(),
-						timestamp: faker.date.recent({ days: 30 }),
+						timestamp: contentTs,
 					},
 					health: hasErrors ? Health.UNHEALTHY : Health.HEALTHY,
 				},
@@ -71,7 +88,7 @@ const generateDataFlows = (count: number): FloraFlow[] => {
 					inError: eventsInError,
 					lastReceived: {
 						id: faker.string.uuid(),
-						timestamp: new Date(Date.now() - 5 * 60 * 1000), // 5 min ago
+						timestamp: eventTs,
 					},
 					health: hasErrors ? Health.INVESTIGATION_NEEDED : Health.HEALTHY,
 				},
@@ -308,6 +325,6 @@ const flows: FloraFlow[] = [
 	},
 ];
 
-flows.push(...generateDataFlows(clients.length - 2));
+flows.push(...generateDataFlows());
 
 export const flowData: Flora = { flows };

@@ -3,6 +3,7 @@ import { ErrorType, type FloraError, type FlowError } from '../types/errors';
 import { getRandomEnum } from './utils';
 import { clients } from './clients';
 import { flowData } from './flowData';
+import type { Downstream } from '../types/flow';
 
 const generateSpecificErrors = (
 	upstreamId: string,
@@ -29,37 +30,30 @@ const generateSpecificErrors = (
 
 const generatedClients = clients.slice(2);
 
-const generateError = (clientId: string): FloraError => {
-	// const clientId = generatedClients[Math.floor(Math.random() * generatedClients.length)].id;
-	const downstreams = ['contentIngest', 'userManager', 'eventCollector'];
-	const downstreamId = downstreams[Math.floor(Math.random() * downstreams.length)];
-	const flow = flowData.flows.find((f) => {
-		f.clientId === clientId &&
-			f.downstreams.find((d) => d.name === downstreamId)?.id === downstreamId;
-	});
-	const downstreamData = flow?.downstreams.find((d) => d.name === downstreamId);
+const generateError = (clientId: string, downstreamData: Downstream): FloraError => {
 	const errorCount =
 		downstreamData?.inError && downstreamData?.inError > 0 ? downstreamData?.inError : 0;
 	const floraError: FloraError = {
 		upstreamId: clientId,
-		downstreamId,
+		downstreamId: downstreamData.id,
 		aggregates: [
 			{
 				type: ErrorType.INVALID_DATA,
 				message: 'Invalid data received',
-				count: errorCount ? Math.floor(errorCount * 0.1) : 0,
+				count: Math.floor(errorCount * 0.25),
 			},
 			{
 				type: ErrorType.MISSING_DATA,
 				message: 'Missing data',
-				count: errorCount ? Math.floor(errorCount * 0.1) : 0,
+				count: Math.floor(errorCount * 0.65),
 			},
 			{
 				type: ErrorType.NETWORK_ERROR,
 				message: 'Network error',
-				count: errorCount ? Math.floor(errorCount * 0.1) : 0,
+				count: Math.floor(errorCount * 0.1),
 			},
 		],
+		errors: [],
 	};
 	for (let i = 0; i < errorCount; i++) {
 		const error: FlowError = {
@@ -79,7 +73,11 @@ const generateError = (clientId: string): FloraError => {
 const generateErrors = (): FloraError[] => {
 	const errors: FloraError[] = [];
 	for (let i = 0; i < generatedClients.length; i++) {
-		errors.push(generateError(generatedClients[i].id));
+		const clientId = generatedClients[i].id;
+		const flow = flowData.flows.find((f) => f.clientId === clientId);
+		flow?.downstreams.forEach((d) => {
+			errors.push(generateError(clientId, d));
+		});
 	}
 	return errors;
 };
