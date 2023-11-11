@@ -11,13 +11,19 @@
 	const resyncModal: ModalSettings = {
 		type: 'confirm',
 		title: 'Re-sync Data Flow?',
-		body: 'Re-syncing data flows may cause an increase in system utilization and costs.<br />Do you wish to proceed?',
+		body:
+			'<span class="text-warning-500 font-bold">Warning!</span> Re-syncing ' +
+			'data flows may cause an increase in system utilization and costs.' +
+			'<br /><br />Do you wish to proceed?',
 		response: (r: boolean) => console.log('response:', r),
 	};
 	const deleteModal: ModalSettings = {
 		type: 'confirm',
 		title: 'Delete Data?',
-		body: 'Deleting data may cause service degredation and customer impacts.<br />Are you sure you know what you are doing?',
+		body:
+			'<span class="text-error-500 font-bold">Stop!</span> Deleting data ' +
+			'may cause service degredation and customer impacts.<br /><br />' +
+			'Are you sure you know what you are doing?',
 		response: (r: boolean) => console.log('response:', r),
 	};
 </script>

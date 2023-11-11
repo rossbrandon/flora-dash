@@ -1,10 +1,9 @@
 import { error } from '@sveltejs/kit';
-import { flowData } from '../../../../data/flowData';
 import { errorDetail } from '../../../../data/errorDetail';
 
-export function load({ params }) {
-	const flowIndex = flowData.flows.findIndex((flow) => flow.upstream.id === params.upstream);
-	const downstreamData = flowData.flows[flowIndex].downstreams.find(
+export async function load({ params, parent }) {
+	const { upstreamData } = await parent();
+	const downstreamData = upstreamData.downstreams.find(
 		(downstream) => downstream.id === params.downstream
 	);
 

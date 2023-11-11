@@ -12,7 +12,7 @@
 				return (
 					c.id.toLowerCase().includes(item.toLowerCase()) ||
 					c.name.toLowerCase().includes(item.toLowerCase()) ||
-					c.description.toLowerCase().includes(item.toLowerCase()) ||
+					c.description?.toLowerCase().includes(item.toLowerCase()) ||
 					c.type.toString().toLowerCase().includes(item.toLowerCase()) ||
 					c.deviceType.toString().toLowerCase().includes(item.toLowerCase())
 				);

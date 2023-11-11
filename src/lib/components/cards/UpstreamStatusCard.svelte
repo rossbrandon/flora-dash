@@ -50,7 +50,7 @@
 		<div class="mt-2 text-{statusColor}-700">{statusSubText}</div>
 	</section>
 	<hr class="opacity-50 m-3" />
-	<section class="p-4 text-left">
+	<section class="p-4 text-left h-44 overflow-scroll">
 		<div class="mb-3"><strong>Downstreams</strong></div>
 		{#each data.downstreams as downstream}
 			<div class="text-left">

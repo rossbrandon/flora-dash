@@ -1,8 +1,8 @@
 import { error } from '@sveltejs/kit';
-import { flowData } from '../../../data/flowData';
 
-export function load({ params }) {
-	const upstreamData = flowData.flows.find((flow) => flow.upstream.id === params.upstream);
+export async function load({ params, parent }) {
+	const { clientDataFlows } = await parent();
+	const upstreamData = clientDataFlows.find((flow) => flow.upstream.id === params.upstream);
 
 	if (!upstreamData) throw error(404);
 

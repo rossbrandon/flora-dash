@@ -1,5 +1,5 @@
 import { clients } from '../data/clients';
 
-export function load() {
+export async function load() {
 	return { clients };
 }
