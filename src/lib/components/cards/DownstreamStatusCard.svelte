@@ -44,7 +44,7 @@
 		datasets: [
 			{
 				data: [downstream.received, downstream.missing, downstream.inError],
-				// these are harded hex codes for skeleton's default theme
+				// these are hard coded values for skeleton's default theme
 				// need to find a dynamic way to pass these in
 				backgroundColor: ['#0fba81', '#eab308', '#ef4444'],
 			},

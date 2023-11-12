@@ -51,6 +51,6 @@ export enum Status {
 export enum Health {
 	UNKNOWN = 'Unknown',
 	UNHEALTHY = 'Unhealthy',
-	INVESTIGATION_NEEDED = 'Investiation Needed',
+	INVESTIGATION_NEEDED = 'Investigation Needed',
 	HEALTHY = 'Healthy',
 }
