@@ -11,20 +11,15 @@ export default {
 		join(require.resolve('@skeletonlabs/skeleton'), '../**/*.{html,js,svelte,ts}'),
 	],
 	safelist: [
-		'bg-primary-500',
-		'bg-tertiary-500',
-		'bg-red-500',
-		'bg-primary-500/30',
-		'bg-tertiary-500/30',
-		'bg-red-500/30',
-		'text-primary-500',
-		'text-primary-700',
-		'text-tertiary-500',
-		'text-tertiary-700',
-		'text-warning-500',
-		'text-warning-700',
-		'text-red-500',
-		'text-red-700',
+		{
+			pattern: /bg-(primary|tertiary|red)-500/,
+		},
+		{
+			pattern: /bg-(primary|tertiary|red)-500\/30/,
+		},
+		{
+			pattern: /text-(primary|tertiary|warning|red)-(500|700)/,
+		},
 	],
 	theme: {
 		extend: {},

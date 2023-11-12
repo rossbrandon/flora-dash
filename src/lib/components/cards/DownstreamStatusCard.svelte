@@ -9,6 +9,22 @@
 	export let upstreamId: string;
 	export let downstream: Downstream;
 
+	// Tailwind CSS classed
+	// 'bg-primary-500'
+	// 'bg-tertiary-500'
+	// 'bg-red-500'
+	// 'bg-primary-500/30'
+	// 'bg-tertiary-500/30'
+	// 'bg-red-500/30'
+	// 'text-primary-500'
+	// 'text-primary-700'
+	// 'text-tertiary-500'
+	// 'text-tertiary-700'
+	// 'text-warning-500'
+	// 'text-warning-700'
+	// 'text-red-500'
+	// 'text-red-700'
+
 	const getStatus = () => {
 		const THREE_HOURS = 180 * 60 * 1000;
 
