@@ -25,7 +25,7 @@ const generateClients = (count: number): Client[] => {
 	for (let i = 0; i < count; i++) {
 		const client: Client = {
 			id: faker.string.uuid(),
-			name: faker.company.name(),
+			name: faker.internet.domainWord(),
 			type: ClientType.EXTERNAL,
 			description: faker.company.catchPhrase(),
 			deviceType: getRandomEnum(DeviceType),

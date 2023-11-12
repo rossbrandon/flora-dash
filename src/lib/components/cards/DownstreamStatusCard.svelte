@@ -1,45 +1,22 @@
 <script lang="ts">
-	import { ProgressBar, ConicGradient } from '@skeletonlabs/skeleton';
-	import type { ConicStop } from '@skeletonlabs/skeleton';
+	import { Doughnut } from 'svelte-chartjs';
+	import 'chart.js/auto';
+	import { ProgressBar } from '@skeletonlabs/skeleton';
 	import { Status, type Downstream } from '$lib/types/flow.js';
 	import { currentClient } from '$lib/stores/client.js';
+	import type { ChartData } from 'chart.js/auto';
 
 	export let upstreamId: string;
-	export let downstreamData: Downstream;
-
-	const stops: ConicStop[] = [
-		{
-			label: 'Successful',
-			color: 'rgb(var(--color-primary-500))',
-			start: 0,
-			end: (downstreamData.received / downstreamData.expected) * 100,
-		},
-		{
-			label: 'Not Received',
-			color: 'rgb(var(--color-warning-500))',
-			start: (downstreamData.received / downstreamData.expected) * 100,
-			end:
-				(downstreamData.received / downstreamData.expected) * 100 +
-				(downstreamData.missing / downstreamData.expected) * 100,
-		},
-		{
-			label: 'In Error',
-			color: ['red', 500],
-			start:
-				(downstreamData.received / downstreamData.expected) * 100 +
-				(downstreamData.missing / downstreamData.expected) * 100,
-			end: 100,
-		},
-	];
+	export let downstream: Downstream;
 
 	const getStatus = () => {
 		const THREE_HOURS = 180 * 60 * 1000;
 
-		if (downstreamData.expected == downstreamData.received) {
+		if (downstream.expected == downstream.received) {
 			return Status.SUCCESSFUL;
 		} else if (
-			downstreamData.expected > downstreamData.received &&
-			new Date().getTime() - downstreamData.lastReceived.timestamp.getTime() < THREE_HOURS
+			downstream.expected > downstream.received &&
+			new Date().getTime() - downstream.lastReceived.timestamp.getTime() < THREE_HOURS
 		) {
 			return Status.IN_PROGRESS;
 		} else {
@@ -62,33 +39,47 @@
 
 	const status = getStatus();
 	const statusColor = getStatusColor(status);
+
+	const donutData: ChartData<'doughnut', number[]> = {
+		datasets: [
+			{
+				data: [downstream.received, downstream.missing, downstream.inError],
+				// these are harded hex codes for skeleton's default theme
+				// need to find a dynamic way to pass these in
+				backgroundColor: ['#0fba81', '#eab308', '#ef4444'],
+			},
+		],
+		labels: ['Successful', 'Not Received', 'In Error'],
+	};
 </script>
 
-<div class="card card-hover">
+<div class="card">
 	<header class="card-header">
-		<span class="h4">{downstreamData.name}</span>
+		<span class="h4">{downstream.name}</span>
 	</header>
 	<section class="p-4 text-left">
 		<h6 class="h6">Status</h6>
 		<h3 class="h3 text-{statusColor}-500">{status.toString()}</h3>
 		<div class="mt-5">
-			<strong>Last Received: </strong>{downstreamData.lastReceived.timestamp.toLocaleString()}
+			<strong>Last Received: </strong>{downstream.lastReceived.timestamp.toLocaleString()}
 		</div>
 	</section>
 	<hr class="opacity-50 m-3" />
-	<section class="mx-10 mt-8 mb-5">
+	<section class="mx-10 mt-8 mb-5 text-center">
 		<ProgressBar
-			value={downstreamData.received}
-			max={downstreamData.expected}
+			value={downstream.received}
+			max={downstream.expected}
 			height="h-3"
 			meter="bg-{statusColor}-500"
 			track="bg-{statusColor}-500/30"
 		/>
-		<span>{downstreamData.received} / {downstreamData.expected}</span>
-		<ConicGradient {stops} legend class="mt-5" />
+		<span>{downstream.received} / {downstream.expected}</span>
+		<div class="mt-5">
+			<Doughnut data={donutData} options={{ responsive: true }} />
+		</div>
 	</section>
 	<hr class="opacity-50 m-5" />
 	<footer class="card-footer">
-		<a href="/{$currentClient?.id}/{upstreamId}/{downstreamData.id}">Details &#8594;</a>
+		<a href="/{$currentClient?.id}/{upstreamId}/{downstream.id}">Details &#8594;</a>
 	</footer>
 </div>

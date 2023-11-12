@@ -68,10 +68,7 @@
 	</div>
 	{#each data.upstreamData.downstreams as downstream}
 		<div class="col-span-1">
-			<DownstreamStatusCard
-				upstreamId={data.upstreamData.upstream.id}
-				downstreamData={downstream}
-			/>
+			<DownstreamStatusCard upstreamId={data.upstreamData.upstream.id} {downstream} />
 		</div>
 	{/each}
 </div>

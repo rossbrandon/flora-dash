@@ -1,8 +1,11 @@
 <script lang="ts">
+	import { Bar } from 'svelte-chartjs';
+	import 'chart.js/auto';
 	import RecentErrorsTable from '$lib/components/tables/RecentErrorsTable.svelte';
 	import { currentDownstream } from '$lib/stores/downstream.js';
 	import { getModalStore, type ModalSettings } from '@skeletonlabs/skeleton';
 	import { ErrorType } from '$lib/types/errors.js';
+	import type { ChartData } from 'chart.js/auto';
 
 	export let data;
 
@@ -31,6 +34,16 @@
 	const invalidData = data.errorData?.aggregates.find((e) => e.type === ErrorType.INVALID_DATA);
 	const missingData = data.errorData?.aggregates.find((e) => e.type === ErrorType.MISSING_DATA);
 	const networkErrors = data.errorData?.aggregates.find((e) => e.type === ErrorType.NETWORK_ERROR);
+
+	const barData: ChartData<'bar', (number | [number, number])[]> = {
+		datasets: [
+			{
+				label: 'Data Flow Trror Types',
+				data: [invalidData?.count ?? 0, missingData?.count ?? 0, networkErrors?.count ?? 0],
+			},
+		],
+		labels: ['Invalid Data', 'Missing Data', 'Network Error'],
+	};
 </script>
 
 <div class="grid grid-cols-4 m-5 gap-5">
@@ -49,9 +62,6 @@
 			<strong>Timestamp: </strong>
 			{data.downstreamData.lastReceived.timestamp.toLocaleString()}
 		</div>
-		<div><strong>Expected: </strong>{data.downstreamData.expected}</div>
-		<div><strong>Received: </strong>{data.downstreamData.received}</div>
-		<div><strong>In Error: </strong>{data.downstreamData.inError}</div>
 	</div>
 	<div class="col-span-2 text-right">
 		<button
@@ -103,14 +113,30 @@
 			<span>Delete Data</span>
 		</button>
 	</div>
-	<div class="col-span-4">
+	<div class="col-span-4 text-center">
 		<hr />
 		<h3 class="h3 text-center m-5">Error Details</h3>
-		<div class="mb-10">
-			<div><strong>Invalid Data Errors: </strong>{invalidData?.count}</div>
-			<div><strong>Missing Data Errors: </strong>{missingData?.count}</div>
-			<div><strong>Network Errors: </strong>{networkErrors?.count}</div>
-		</div>
+	</div>
+	<div class="col-span-1 text-left">
+		<div class="mb-2"><span class="h4">Flow Totals</span></div>
+		<div><strong>Expected: </strong>{data.downstreamData.expected}</div>
+		<div><strong>Received: </strong>{data.downstreamData.received}</div>
+		<div><strong>In Error: </strong>{data.downstreamData.inError}</div>
+	</div>
+	<div class="col-span-2 items-center">
+		{#if data.downstreamData.inError > 0}
+			<Bar data={barData} options={{ responsive: true }} />
+		{:else}
+			<div class="text-center"><span>No errors found</span></div>
+		{/if}
+	</div>
+	<div class="col-span-1 text-right">
+		<div class="mb-2"><span class="h4">Error Totals</span></div>
+		<div><strong>Invalid Data: </strong>{invalidData?.count}</div>
+		<div><strong>Missing Data: </strong>{missingData?.count}</div>
+		<div><strong>Network Error: </strong>{networkErrors?.count}</div>
+	</div>
+	<div class="col-span-4">
 		<RecentErrorsTable data={data.errorData?.errors ?? []} />
 	</div>
 </div>
