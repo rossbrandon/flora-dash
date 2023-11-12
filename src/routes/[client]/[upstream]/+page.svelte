@@ -1,6 +1,6 @@
 <script lang="ts">
 	import DownstreamStatusCard from '$lib/components/cards/DownstreamStatusCard.svelte';
-	import { currentUpstream } from '../../../stores/upstream.js';
+	import { currentUpstream } from '$lib/stores/upstream.js';
 
 	export let data;
 

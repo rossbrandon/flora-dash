@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { currentClient } from '../../../stores/client';
-	import { Health, type FloraFlow } from '../../../types/flow';
+	import { currentClient } from '$lib/stores/client';
+	import { Health, type FloraFlow } from '$lib/types/flow';
 
 	export let data: FloraFlow;
 

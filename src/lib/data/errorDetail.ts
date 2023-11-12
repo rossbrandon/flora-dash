@@ -1,9 +1,9 @@
 import { faker } from '@faker-js/faker';
-import { ErrorType, type FloraError, type FlowError } from '../types/errors';
+import { ErrorType, type FloraError, type FlowError } from '$lib/types/errors';
 import { getRandomEnum } from './utils';
 import { clients } from './clients';
 import { flowData } from './flowData';
-import type { Downstream } from '../types/flow';
+import type { Downstream } from '$lib/types/flow';
 
 const generateSpecificErrors = (
 	upstreamId: string,

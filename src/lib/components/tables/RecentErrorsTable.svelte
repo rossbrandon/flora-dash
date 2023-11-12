@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Paginator, Table, tableMapperValues } from '@skeletonlabs/skeleton';
 	import type { PaginationSettings, TableSource } from '@skeletonlabs/skeleton';
-	import { ErrorType, type FlowError } from '../../../types/errors.js';
+	import { ErrorType, type FlowError } from '$lib/types/errors.js';
 
 	export let data: FlowError[];
 

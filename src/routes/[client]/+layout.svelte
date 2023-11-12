@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { currentClient } from '../../stores/client';
+	import { currentClient } from '$lib/stores/client';
 
 	export let data;
 

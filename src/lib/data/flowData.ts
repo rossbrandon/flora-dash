@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { Health, type Flora, type FloraFlow } from '../types/flow';
+import { Health, type Flora, type FloraFlow } from '$lib/types/flow';
 import { clients } from './clients';
 
 const determineHealth = (hasErrors: boolean, timestamp: Date): Health => {
@@ -30,7 +30,8 @@ const generateDataFlows = (): FloraFlow[] => {
 		const eventsMissing = hasErrors ? Math.floor(eventsExpected * 0.05) : 0;
 		const eventsInError = hasErrors ? Math.floor(eventsExpected * 0.05) : 0;
 		const contentTs = faker.date.recent({ days: 30 });
-		const eventTs = new Date(Date.now() - 5 * 60 * 1000); // 5 min ago
+		const randomMs = Math.floor(Math.random() * 3 * 60 * 60 * 1000); // random ms within 3 hours ago
+		const eventTs = new Date(Date.now() - randomMs);
 		const contentHealth = determineHealth(hasErrors, contentTs);
 		const eventHealth = determineHealth(hasErrors, eventTs);
 		const overallHealth =

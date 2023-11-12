@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { ClientType, DeviceType, type Client } from '../types/client';
+import { ClientType, DeviceType, type Client } from '$lib/types/client';
 import { getRandomEnum } from './utils';
 
 const generateClients = (count: number): Client[] => {

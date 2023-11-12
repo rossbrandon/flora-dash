@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { currentClient } from '../../../stores/client';
-	import { currentDownstream } from '../../../stores/downstream';
-	import { currentUpstream } from '../../../stores/upstream';
+	import { currentClient } from '$lib/stores/client';
+	import { currentDownstream } from '$lib/stores/downstream';
+	import { currentUpstream } from '$lib/stores/upstream';
 	import BreadcrumbItem from './BreadcrumbItem.svelte';
 </script>
 

@@ -6,10 +6,10 @@
 	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
 	import { goto } from '$app/navigation';
 	import Breadcrumbs from '$lib/components/navigation/Breadcrumbs.svelte';
-	import { currentClient } from '../stores/client';
-	import { currentUpstream } from '../stores/upstream';
-	import { currentDownstream } from '../stores/downstream';
-	import { searchFilter } from '../stores/search';
+	import { currentClient } from '$lib/stores/client';
+	import { currentUpstream } from '$lib/stores/upstream';
+	import { currentDownstream } from '$lib/stores/downstream';
+	import { searchFilter } from '$lib/stores/search';
 
 	// initialize skeleton popup and modals
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });

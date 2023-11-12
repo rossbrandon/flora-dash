@@ -1,7 +1,7 @@
 <script lang="ts">
 	import ClientCard from '$lib/components/cards/ClientCard.svelte';
-	import { searchFilter } from '../stores/search.js';
-	import type { Client } from '../types/client.js';
+	import { searchFilter } from '$lib/stores/search';
+	import type { Client } from '$lib/types/client';
 
 	export let data;
 
@@ -25,6 +25,6 @@
 
 <div class="grid grid-cols-4 m-20 gap-5">
 	{#each filteredClients as client}
-		<ClientCard data={client} />
+		<ClientCard {client} />
 	{/each}
 </div>

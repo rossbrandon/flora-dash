@@ -1,5 +1,5 @@
 import { error } from '@sveltejs/kit';
-import { errorDetail } from '../../../../data/errorDetail';
+import { errorDetail } from '$lib/data/errorDetail';
 
 export async function load({ params, parent }) {
 	const { upstreamData } = await parent();

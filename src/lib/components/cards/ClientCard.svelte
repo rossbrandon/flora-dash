@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { searchFilter } from '../../../stores/search';
-	import { type Client, ClientType } from '../../../types/client';
+	import { searchFilter } from '$lib/stores/search';
+	import { type Client, ClientType } from '$lib/types/client';
 
-	export let data: Client;
+	export let client: Client;
 
 	const getClientColor = (type: ClientType) => {
 		switch (type) {
@@ -15,24 +15,25 @@
 		}
 	};
 
-	$: clientColor = getClientColor(data.type);
+	$: clientColor = getClientColor(client.type);
 
 	const handleClick = () => {
-		searchFilter.set(data.name);
+		searchFilter.set(client.name);
 	};
 </script>
 
 <div class="card card-hover">
 	<header class="card-header">
-		<span class="h4">{data.name}</span>
+		<span class="h4">{client.name}</span>
+		<div><span class="font-thin">{client.id}</span></div>
 	</header>
 	<section class="p-4 text-left">
 		<h6 class="h6">Client Type</h6>
-		<span class="h3 text-{clientColor}-500">{data.type.toString()}</span>
-		<div class="mt-5"><strong>Device Type: </strong>{data.deviceType}</div>
+		<span class="h3 text-{clientColor}-500">{client.type.toString()}</span>
+		<div class="mt-5"><strong>Device Type: </strong>{client.deviceType}</div>
 	</section>
 	<hr class="opacity-50 m-5" />
 	<footer class="card-footer">
-		<a href="/{data.id}" on:click={handleClick}>Data Flows &#8594;</a>
+		<a href="/{client.id}" on:click={handleClick}>Data Flows &#8594;</a>
 	</footer>
 </div>

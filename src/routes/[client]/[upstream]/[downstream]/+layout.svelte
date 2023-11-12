@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import { currentDownstream } from '../../../../stores/downstream';
+	import { currentDownstream } from '$lib/stores/downstream';
 
 	export let data;
 

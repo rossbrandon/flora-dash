@@ -1,8 +1,8 @@
 <script lang="ts">
 	import RecentErrorsTable from '$lib/components/tables/RecentErrorsTable.svelte';
-	import { currentDownstream } from '../../../../stores/downstream.js';
+	import { currentDownstream } from '$lib/stores/downstream.js';
 	import { getModalStore, type ModalSettings } from '@skeletonlabs/skeleton';
-	import { ErrorType } from '../../../../types/errors.js';
+	import { ErrorType } from '$lib/types/errors.js';
 
 	export let data;
 

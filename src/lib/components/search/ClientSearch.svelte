@@ -2,8 +2,8 @@
 	import { goto } from '$app/navigation';
 	import { Autocomplete, popup } from '@skeletonlabs/skeleton';
 	import type { AutocompleteOption, PopupSettings } from '@skeletonlabs/skeleton';
-	import type { Client } from '../../../types/client';
-	import { currentClient } from '../../../stores/client';
+	import type { Client } from '$lib/types/client';
+	import { currentClient } from '$lib/stores/client';
 
 	export let clients: Client[];
 

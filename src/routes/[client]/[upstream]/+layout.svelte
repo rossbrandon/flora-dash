@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { currentUpstream } from '../../../stores/upstream';
+	import { currentUpstream } from '$lib/stores/upstream';
 
 	export let data;
 
