@@ -27,7 +27,7 @@
 				type: getErrorType(error.type),
 				logLink: `<a class="anchor" target="_blank" href='${error.logLink}'>${error.logLink}</a>`,
 				message: `<span class="truncate">${error.message}</span>`,
-				timestamp: error.timestamp.toLocaleString(),
+				timestamp: new Date(error.timestamp).toLocaleString(),
 			};
 			rows.push(row);
 		});

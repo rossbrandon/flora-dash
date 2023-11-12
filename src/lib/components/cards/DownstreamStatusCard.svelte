@@ -16,7 +16,7 @@
 			return Status.SUCCESSFUL;
 		} else if (
 			downstream.expected > downstream.received &&
-			new Date().getTime() - downstream.lastReceived.timestamp.getTime() < THREE_HOURS
+			new Date().getTime() - new Date(downstream.lastReceived.timestamp).getTime() < THREE_HOURS
 		) {
 			return Status.IN_PROGRESS;
 		} else {
