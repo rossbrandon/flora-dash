@@ -1,10 +1,11 @@
 import { error } from '@sveltejs/kit';
 import { errorDetail } from '$lib/data/errorDetail';
+import type { Downstream } from '$lib/types/flow.js';
 
 export async function load({ params, parent }) {
 	const { upstreamData } = await parent();
 	const downstreamData = upstreamData.downstreams.find(
-		(downstream) => downstream.id === params.downstream
+		(downstream: Downstream) => downstream.id === params.downstream
 	);
 
 	if (!downstreamData) throw error(404);
