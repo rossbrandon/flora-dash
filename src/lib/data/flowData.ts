@@ -25,7 +25,7 @@ const generateDataFlows = (): FloraFlow[] => {
 		const contentReceived = hasErrors ? Math.floor(upstreamTotalCount * 0.9) : upstreamTotalCount;
 		const contentMissing = hasErrors ? Math.floor(upstreamTotalCount * 0.05) : 0;
 		const contentInError = hasErrors ? Math.floor(upstreamTotalCount * 0.05) : 0;
-		const eventsExpected = Math.floor(Math.random() * 3000000);
+		const eventsExpected = Math.floor(Math.random() * 300000);
 		const eventsReceived = hasErrors ? Math.floor(eventsExpected * 0.9) : eventsExpected;
 		const eventsMissing = hasErrors ? Math.floor(eventsExpected * 0.05) : 0;
 		const eventsInError = hasErrors ? Math.floor(eventsExpected * 0.05) : 0;
