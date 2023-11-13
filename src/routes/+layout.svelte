@@ -4,7 +4,7 @@
 	import { AppShell, AppBar, LightSwitch, Modal } from '@skeletonlabs/skeleton';
 	import { storePopup, initializeStores } from '@skeletonlabs/skeleton';
 	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
-	import { goto } from '$app/navigation';
+	import { afterNavigate, goto } from '$app/navigation';
 	import Breadcrumbs from '$lib/components/navigation/Breadcrumbs.svelte';
 	import { currentClient } from '$lib/stores/client';
 	import { currentUpstream } from '$lib/stores/upstream';
@@ -30,6 +30,10 @@
 	};
 
 	$: if ($page.route.id === '/') resetState();
+
+	afterNavigate(() => {
+		document.getElementById('page')?.scrollTo(0, 0);
+	});
 </script>
 
 <!-- Initialize skeleton modal -->
