@@ -61,7 +61,7 @@
 		<h6 class="h6">Status</h6>
 		<h3 class="h3 text-{statusColor}-500">{status.toString()}</h3>
 		<div class="mt-5">
-			<strong>Last Received: </strong>{downstream.lastReceived.timestamp.toLocaleString()}
+			<strong>Last Received: </strong>{new Date(downstream.lastReceived.timestamp).toLocaleString()}
 		</div>
 	</section>
 	<hr class="opacity-50 m-3" />

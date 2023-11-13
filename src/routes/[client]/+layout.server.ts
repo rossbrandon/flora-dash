@@ -17,6 +17,14 @@ export async function load({ params }) {
 	const flows: FloraFlow[] = await fetchDataFlows();
 	const clientDataFlows = flows.filter((flow) => flow.clientId === params.client);
 
+	// temp hack to force in progress status for demo flow
+	clientDataFlows.forEach((f) => {
+		if (f.clientId === 'internal' && f.upstream.id === 'contentIngest') {
+			const index = f.downstreams.findIndex((d) => d.id === 'fileStorage');
+			f.downstreams[index].lastReceived.timestamp = new Date(Date.now() - 7 * 60 * 1000); // 7 min ago
+		}
+	});
+
 	if (!clientDataFlows) throw error(404);
 
 	return { clientDataFlows };
