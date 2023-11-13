@@ -50,7 +50,7 @@
 	<div class="col-span-4 text-center">
 		<h3 class="h3 text-center m-5">Downstream Info</h3>
 	</div>
-	<div class="col-span-2 text-left">
+	<div class="col-span-4 md:col-span-2 text-left">
 		<div><strong>Name: </strong>{data.downstreamData.name}</div>
 		<div><strong>ID: </strong>{data.downstreamData.id}</div>
 		<div><strong>Last Document Received: </strong></div>
@@ -63,10 +63,10 @@
 			{data.downstreamData.lastReceived.timestamp.toLocaleString()}
 		</div>
 	</div>
-	<div class="col-span-2 text-right">
+	<div class="col-span-4 md:col-span-2 lg:col-span-2 md:text-right">
 		<button
 			type="button"
-			class="btn variant-filled-warning rounded"
+			class="btn variant-filled-warning rounded w-full md:w-3/4 lg:w-1/4 mb-1"
 			on:click={() => modalStore.trigger(resyncModal)}
 		>
 			<span>
@@ -88,9 +88,11 @@
 			</span>
 			<span>Re-Sync Data</span>
 		</button>
+		<!-- </div>
+	<div class="col-span-4 md:col-span-1 lg:col-span-1 md:text-right"> -->
 		<button
 			type="button"
-			class="btn variant-filled-error rounded"
+			class="btn variant-filled-error rounded w-full md:w-3/4 lg:w-1/4"
 			on:click={() => modalStore.trigger(deleteModal)}
 		>
 			<span>
@@ -117,24 +119,24 @@
 		<hr />
 		<h3 class="h3 text-center m-5">Error Details</h3>
 	</div>
-	<div class="col-span-1 text-left">
+	<div class="col-span-2 text-left">
 		<div class="mb-2"><span class="h4">Flow Totals</span></div>
 		<div><strong>Expected: </strong>{data.downstreamData.expected}</div>
 		<div><strong>Received: </strong>{data.downstreamData.received}</div>
 		<div><strong>In Error: </strong>{data.downstreamData.inError}</div>
 	</div>
-	<div class="col-span-2 items-center">
+	<div class="col-span-2 text-right">
+		<div class="mb-2"><span class="h4">Error Totals</span></div>
+		<div><strong>Invalid Data: </strong>{invalidData?.count}</div>
+		<div><strong>Missing Data: </strong>{missingData?.count}</div>
+		<div><strong>Network Error: </strong>{networkErrors?.count}</div>
+	</div>
+	<div class="col-span-4 sm:col-span-4 items-center m-auto w-full lg:w-3/5">
 		{#if data.downstreamData.inError > 0}
 			<Bar data={barData} options={{ responsive: true }} />
 		{:else}
 			<div class="text-center"><span>No errors found</span></div>
 		{/if}
-	</div>
-	<div class="col-span-1 text-right">
-		<div class="mb-2"><span class="h4">Error Totals</span></div>
-		<div><strong>Invalid Data: </strong>{invalidData?.count}</div>
-		<div><strong>Missing Data: </strong>{missingData?.count}</div>
-		<div><strong>Network Error: </strong>{networkErrors?.count}</div>
 	</div>
 	<div class="col-span-4">
 		<RecentErrorsTable data={data.errorData?.errors ?? []} />

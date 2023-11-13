@@ -7,17 +7,17 @@
 	currentUpstream.set(data.upstreamData.upstream);
 </script>
 
-<div class="grid grid-cols-4 m-5 gap-5">
-	<div class="col-span-4 text-center">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 m-5 gap-5">
+	<div class="col-span-1 md:col-span-2 lg:col-span-4 text-center">
 		<h3 class="h3 text-center m-5">Upstream Info</h3>
 	</div>
-	<div class="col-span-2 text-left">
+	<div class="col-span-1 md:col-span-1 lg:col-span-2 text-left">
 		<div><strong>Name: </strong>{data.upstreamData.upstream.name}</div>
 		<div><strong>ID: </strong>{data.upstreamData.upstream.id}</div>
 		<div><strong>Total Documents: </strong>{data.upstreamData.upstream.total}</div>
 		<div><strong>Documents in Error: </strong>{data.upstreamData.upstream.inError}</div>
 	</div>
-	<div class="col-span-2 text-right">
+	<div class="col-span-1 md:col-span-1 lg:col-span-2 md:text-right">
 		{#if data.upstreamData.meta && data.upstreamData.meta?.systemDiagramUrl}
 			<div>
 				<a class="anchor" href={data.upstreamData.meta.systemDiagramUrl} target="_blank"
@@ -62,7 +62,7 @@
 			</div>
 		{/if}
 	</div>
-	<div class="col-span-4">
+	<div class="col-span-1 md:col-span-2 lg:col-span-4">
 		<hr />
 		<h3 class="h3 text-center m-5">Downstreams</h3>
 	</div>

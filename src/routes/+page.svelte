@@ -23,7 +23,7 @@
 	$: filteredClients = getFilteredClients($searchFilter);
 </script>
 
-<div class="grid grid-cols-4 m-20 gap-5">
+<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 m-20 gap-5">
 	{#each filteredClients as client}
 		<ClientCard {client} />
 	{/each}
