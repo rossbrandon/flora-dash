@@ -21,7 +21,7 @@
 			const descKeywords = c.description?.split(' ');
 			const item = {
 				label: c.name,
-				value: c.id,
+				value: c.clientId,
 				keywords: descKeywords?.join(', '),
 				meta: c,
 			};
@@ -36,7 +36,7 @@
 		const client: Client | undefined = event.detail.meta;
 		searchInput = client?.name ?? '';
 		currentClient.set(client);
-		goto(`/${client?.id ?? ''}`);
+		goto(`/${client?.clientId ?? ''}`);
 	}
 </script>
 

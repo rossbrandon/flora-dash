@@ -46,7 +46,12 @@
 	</header>
 	<section class="p-4 text-left lg:h-32">
 		<h6 class="h6">Status</h6>
-		<h3 class="h3 text-{statusColor}-500">{data.health.toString()}</h3>
+		<h3 class="h3 text-{statusColor}-500">
+			{data.health
+				.toString()
+				.replace(/([A-Z])/g, ' $1')
+				.trim()}
+		</h3>
 		<div class="mt-2 text-{statusColor}-700">{statusSubText}</div>
 	</section>
 	<hr class="opacity-50 m-3" />
@@ -64,6 +69,6 @@
 	</section>
 	<hr class="opacity-50 m-5" />
 	<footer class="card-footer">
-		<a href="/{$currentClient?.id}/{data.upstream.id}">Overview &#8594;</a>
+		<a href="/{$currentClient?.clientId}/{data.upstream.upstreamId}">Overview &#8594;</a>
 	</footer>
 </div>

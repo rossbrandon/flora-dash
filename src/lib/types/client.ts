@@ -1,7 +1,7 @@
 export type Client = {
-	id: string;
+	clientId: string;
 	name: string;
-	type: ClientType;
+	clientType: ClientType;
 	deviceType: DeviceType;
 	description?: string;
 	userAgent?: string;

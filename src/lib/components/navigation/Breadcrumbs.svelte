@@ -12,7 +12,7 @@
 		<li class="crumb-separator" aria-hidden>&rsaquo;</li>
 		<BreadcrumbItem
 			shouldLink={$page.route.id != '/[client]'}
-			href={`/${$currentClient?.id}`}
+			href={`/${$currentClient?.clientId}`}
 			text={$currentClient?.name}
 		/>
 	{/if}
@@ -21,7 +21,7 @@
 		<li class="crumb-separator" aria-hidden>&rsaquo;</li>
 		<BreadcrumbItem
 			shouldLink={$page.route.id != '/[client]/[upstream]'}
-			href={`/${$currentClient?.id}/${$currentUpstream?.id}`}
+			href={`/${$currentClient?.clientId}/${$currentUpstream?.upstreamId}`}
 			text={$currentUpstream?.name}
 		/>
 	{/if}
