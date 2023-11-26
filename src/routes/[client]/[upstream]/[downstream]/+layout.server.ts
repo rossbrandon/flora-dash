@@ -1,11 +1,10 @@
 import { error } from '@sveltejs/kit';
 import type { FloraFlow, Downstream } from '$lib/types/flow.js';
 import type { FloraError } from '$lib/types/errors.js';
+import { API_URL } from '$env/static/private';
 
 const fetchUpstreamData = async (clientId: string, upstreamId: string): Promise<FloraFlow> => {
-	const response = await fetch(
-		`http://localhost:8080/api/v1/clients/${clientId}/flows/${upstreamId}`
-	);
+	const response = await fetch(`${API_URL}/api/v1/clients/${clientId}/flows/${upstreamId}`);
 
 	if (!response.ok) {
 		throw error(500);
@@ -16,7 +15,7 @@ const fetchUpstreamData = async (clientId: string, upstreamId: string): Promise<
 
 const fetchErrorDetails = async (upstreamId: string, downstreamId: string): Promise<FloraError> => {
 	const response = await fetch(
-		`http://localhost:8080/api/v1/errors/upstreams/${upstreamId}/downstreams/${downstreamId}`
+		`${API_URL}/api/v1/errors/upstreams/${upstreamId}/downstreams/${downstreamId}`
 	);
 
 	if (!response.ok) {
