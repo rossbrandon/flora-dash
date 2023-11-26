@@ -13,7 +13,7 @@
 	</div>
 	<div class="col-span-4 md:col-span-2 text-left">
 		<div><strong>Name: </strong>{data.upstreamData.upstream.name}</div>
-		<div><strong>ID: </strong>{data.upstreamData.upstream.id}</div>
+		<div><strong>ID: </strong>{data.upstreamData.upstream.upstreamId}</div>
 		<div><strong>Total Documents: </strong>{data.upstreamData.upstream.total}</div>
 		<div><strong>Documents in Error: </strong>{data.upstreamData.upstream.inError}</div>
 	</div>
@@ -68,7 +68,7 @@
 	</div>
 	{#each data.upstreamData.downstreams as downstream}
 		<div class="col-span-4 md:col-span-2 lg:col-span-1">
-			<DownstreamStatusCard upstreamId={data.upstreamData.upstream.id} {downstream} />
+			<DownstreamStatusCard upstreamId={data.upstreamData.upstream.upstreamId} {downstream} />
 		</div>
 	{/each}
 </div>

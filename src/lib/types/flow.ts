@@ -18,7 +18,7 @@ export type FlowMetaData = {
 };
 
 export type Upstream = {
-	id: string;
+	upstreamId: string;
 	name: string;
 	total: number;
 	inError: number;
@@ -26,7 +26,7 @@ export type Upstream = {
 };
 
 export type Downstream = {
-	id: string;
+	downstreamId: string;
 	name: string;
 	expected: number;
 	received: number;
@@ -37,7 +37,7 @@ export type Downstream = {
 };
 
 export type LastReceived = {
-	id: string;
+	documentId: string;
 	timestamp: Date;
 };
 
@@ -51,6 +51,6 @@ export enum Status {
 export enum Health {
 	UNKNOWN = 'Unknown',
 	UNHEALTHY = 'Unhealthy',
-	INVESTIGATION_NEEDED = 'Investigation Needed',
+	INVESTIGATION_NEEDED = 'InvestigationNeeded',
 	HEALTHY = 'Healthy',
 }

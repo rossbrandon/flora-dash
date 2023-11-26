@@ -59,7 +59,12 @@
 	</header>
 	<section class="p-4 text-left">
 		<h6 class="h6">Status</h6>
-		<h3 class="h3 text-{statusColor}-500">{status.toString()}</h3>
+		<h3 class="h3 text-{statusColor}-500">
+			{status
+				.toString()
+				.replace(/([A-Z])/g, ' $1')
+				.trim()}
+		</h3>
 		<div class="mt-5">
 			<strong>Last Received: </strong>{new Date(downstream.lastReceived.timestamp).toLocaleString()}
 		</div>
@@ -80,6 +85,6 @@
 	</section>
 	<hr class="opacity-50 m-5" />
 	<footer class="card-footer">
-		<a href="/{$currentClient?.id}/{upstreamId}/{downstream.id}">Details &#8594;</a>
+		<a href="/{$currentClient?.clientId}/{upstreamId}/{downstream.downstreamId}">Details &#8594;</a>
 	</footer>
 </div>

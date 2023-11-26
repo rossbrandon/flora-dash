@@ -6,7 +6,7 @@ export type FloraError = {
 };
 
 export type FlowErrorAggregate = {
-	type: ErrorType;
+	errorType: ErrorType;
 	count: number;
 	message: string;
 	logLink?: string;
@@ -16,7 +16,7 @@ export type FlowError = {
 	upstreamId: string;
 	downstreamId: string;
 	documentId: string;
-	type: ErrorType;
+	errorType: ErrorType;
 	message: string;
 	timestamp: Date;
 	logLink?: string;
@@ -24,14 +24,14 @@ export type FlowError = {
 
 export enum ErrorStatus {
 	UNKNOWN = 'Unknown',
-	IN_ERROR = 'In Error',
+	IN_ERROR = 'InError',
 	MISSING = 'Missing',
 	FOUND = 'Found',
 }
 
 export enum ErrorType {
 	UNKNOWN = 'Unknown',
-	NETWORK_ERROR = 'Network Error',
-	INVALID_DATA = 'Invalid Data',
-	MISSING_DATA = 'Missing Data',
+	NETWORK_ERROR = 'NetworkError',
+	INVALID_DATA = 'InvalidData',
+	MISSING_DATA = 'MissingData',
 }

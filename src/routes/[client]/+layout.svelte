@@ -4,7 +4,7 @@
 
 	export let data;
 
-	currentClient.set(data.clients.find((c) => c.id === $page.params.client));
+	currentClient.set(data.clients.find((c) => c.clientId === $page.params.client));
 </script>
 
 <!-- Page Route Content -->

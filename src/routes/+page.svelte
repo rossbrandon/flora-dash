@@ -10,10 +10,10 @@
 			const searchText = searchFilter.split(' ');
 			return searchText.every((item) => {
 				return (
-					c.id.toLowerCase().includes(item.toLowerCase()) ||
+					c.clientId.toLowerCase().includes(item.toLowerCase()) ||
 					c.name.toLowerCase().includes(item.toLowerCase()) ||
 					c.description?.toLowerCase().includes(item.toLowerCase()) ||
-					c.type.toString().toLowerCase().includes(item.toLowerCase()) ||
+					c.clientType.toString().toLowerCase().includes(item.toLowerCase()) ||
 					c.deviceType.toString().toLowerCase().includes(item.toLowerCase())
 				);
 			});

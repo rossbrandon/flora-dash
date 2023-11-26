@@ -31,9 +31,15 @@
 		response: (r: boolean) => console.log('response:', r),
 	};
 
-	const invalidData = data.errorData?.aggregates.find((e) => e.type === ErrorType.INVALID_DATA);
-	const missingData = data.errorData?.aggregates.find((e) => e.type === ErrorType.MISSING_DATA);
-	const networkErrors = data.errorData?.aggregates.find((e) => e.type === ErrorType.NETWORK_ERROR);
+	const invalidData = data.errorData?.aggregates.find(
+		(e) => e.errorType === ErrorType.INVALID_DATA
+	);
+	const missingData = data.errorData?.aggregates.find(
+		(e) => e.errorType === ErrorType.MISSING_DATA
+	);
+	const networkErrors = data.errorData?.aggregates.find(
+		(e) => e.errorType === ErrorType.NETWORK_ERROR
+	);
 
 	const barData: ChartData<'bar', (number | [number, number])[]> = {
 		datasets: [
@@ -52,11 +58,11 @@
 	</div>
 	<div class="col-span-4 md:col-span-2 text-left">
 		<div><strong>Name: </strong>{data.downstreamData.name}</div>
-		<div><strong>ID: </strong>{data.downstreamData.id}</div>
+		<div><strong>ID: </strong>{data.downstreamData.downstreamId}</div>
 		<div><strong>Last Document Received: </strong></div>
 		<div class="ml-5">
 			<strong>ID: </strong>
-			{data.downstreamData.lastReceived.id}
+			{data.downstreamData.lastReceived.documentId}
 		</div>
 		<div class="ml-5">
 			<strong>Timestamp: </strong>

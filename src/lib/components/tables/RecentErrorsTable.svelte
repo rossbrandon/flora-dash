@@ -24,7 +24,7 @@
 			const row = {
 				position: index + 1,
 				documentId: error.documentId,
-				type: getErrorType(error.type),
+				type: getErrorType(error.errorType),
 				logLink: `<a class="anchor" target="_blank" href='${error.logLink}'>${error.logLink}</a>`,
 				message: `<span class="truncate">${error.message}</span>`,
 				timestamp: new Date(error.timestamp).toLocaleString(),
