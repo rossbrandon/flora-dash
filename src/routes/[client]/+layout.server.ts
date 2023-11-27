@@ -1,12 +1,16 @@
 import { error } from '@sveltejs/kit';
 import type { FloraFlow } from '$lib/types/flow.js';
-import { API_URL } from '$env/static/private';
+import { API_URL, API_TOKEN } from '$env/static/private';
 
 const fetchClientDataFlows = async (clientId: string): Promise<FloraFlow[]> => {
-	const response = await fetch(`${API_URL}/api/v1/clients/${clientId}/flows`);
+	const response = await fetch(`${API_URL}/api/v1/clients/${clientId}/flows`, {
+		headers: {
+			Authorization: `Bearer ${API_TOKEN}`,
+		},
+	});
 
 	if (!response.ok) {
-		throw error(500);
+		throw error(response.status);
 	}
 
 	return await response.json();
