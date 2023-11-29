@@ -3,7 +3,7 @@
 Dashboard UI to support the Data Flora concept.
 
 Blog post about this concept on rossbrandon.dev:
-[Designing Data Systems With Visibility & Management at the Forefront](https://rossbrandon.dev/posts/designing-data-systems-with-visibility/)
+[Designing Data Systems for Visibility & Management](https://rossbrandon.dev/posts/designing-data-systems-with-visibility/)
 
 Backend Repo: [flora-api](https://github.com/rossbrandon/flora-api)
 
