@@ -26,7 +26,7 @@ export async function load() {
 		const demoClientIntIndex = clients.indexOf(demoClientInt);
 		const demoClientExtIndex = clients.indexOf(demoClientExt);
 		clients.splice(demoClientIntIndex, 1);
-		clients.splice(demoClientExtIndex, 1);
+		clients.splice(demoClientExtIndex - 1, 1);
 		clients.unshift(demoClientInt, demoClientExt);
 	}
 
