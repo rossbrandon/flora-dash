@@ -62,7 +62,10 @@
 				<span>{downstream.name}</span>
 				<span class="px-2">--</span>
 				<span class="text-{getStatusColor(downstream.health)}-500">
-					{downstream.health.toString()}
+					{downstream.health
+						.toString()
+						.replace(/([A-Z])/g, ' $1')
+						.trim()}
 				</span>
 			</div>
 		{/each}
