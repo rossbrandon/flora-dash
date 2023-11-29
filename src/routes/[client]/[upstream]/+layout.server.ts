@@ -21,6 +21,13 @@ export async function load({ params }) {
 
 	if (!upstreamData) throw error(404);
 
+	// hack to force in progress status for demo flow -- this would be removed in real application
+	upstreamData.downstreams.forEach((d) => {
+		if (d.downstreamId === 'fileStorage') {
+			d.lastReceived.timestamp = new Date(Date.now() - 7 * 60 * 1000); // 7 min ago
+		}
+	});
+
 	return {
 		upstreamData,
 	};
