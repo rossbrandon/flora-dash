@@ -1,14 +1,10 @@
 import { error } from '@sveltejs/kit';
 import type { FloraFlow, Downstream } from '$lib/types/flow.js';
 import type { FloraError } from '$lib/types/errors.js';
-import { API_URL, API_TOKEN } from '$env/static/private';
+import { FLOWS_API_URL, ERRORS_API_URL } from '$env/static/private';
 
-const fetchUpstreamData = async (clientId: string, upstreamId: string): Promise<FloraFlow> => {
-	const response = await fetch(`${API_URL}/api/v1/clients/${clientId}/flows/${upstreamId}`, {
-		headers: {
-			Authorization: `Bearer ${API_TOKEN}`,
-		},
-	});
+const fetchUpstreamData = async (): Promise<FloraFlow[]> => {
+	const response = await fetch(FLOWS_API_URL);
 
 	if (!response.ok) {
 		throw error(response.status);
@@ -17,15 +13,8 @@ const fetchUpstreamData = async (clientId: string, upstreamId: string): Promise<
 	return await response.json();
 };
 
-const fetchErrorDetails = async (upstreamId: string, downstreamId: string): Promise<FloraError> => {
-	const response = await fetch(
-		`${API_URL}/api/v1/errors/upstreams/${upstreamId}/downstreams/${downstreamId}`,
-		{
-			headers: {
-				Authorization: `Bearer ${API_TOKEN}`,
-			},
-		}
-	);
+const fetchErrorDetails = async (): Promise<FloraError[]> => {
+	const response = await fetch(ERRORS_API_URL);
 
 	if (!response.ok) {
 		throw error(response.status);
@@ -35,14 +24,26 @@ const fetchErrorDetails = async (upstreamId: string, downstreamId: string): Prom
 };
 
 export async function load({ params }) {
-	const upstreamData = await fetchUpstreamData(params.client, params.upstream);
+	const upstreams: FloraFlow[] = await fetchUpstreamData();
+	const upstreamData: FloraFlow | undefined = upstreams.find((f) => {
+		if (f.clientId === params.client && f.upstream.upstreamId == params.upstream) {
+			return f;
+		}
+	});
+
+	if (!upstreamData) throw error(404);
+
 	const downstreamData = upstreamData.downstreams.find(
 		(downstream: Downstream) => downstream.downstreamId === params.downstream
 	);
 
 	if (!downstreamData) throw error(404);
 
-	const errorData: FloraError = await fetchErrorDetails(params.upstream, params.downstream);
+	const errors: FloraError[] = await fetchErrorDetails();
+	const errorData: FloraError | undefined = errors.find(
+		(e) => e.upstreamId === params.upstream && e.downstreamId === params.downstream
+	);
+
 	return {
 		downstreamData,
 		errorData,

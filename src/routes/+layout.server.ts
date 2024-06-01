@@ -1,13 +1,9 @@
 import type { Client } from '$lib/types/client';
 import { error } from '@sveltejs/kit';
-import { API_URL, API_TOKEN } from '$env/static/private';
+import { CLIENTS_API_URL } from '$env/static/private';
 
 const fetchClients = async (): Promise<Client[]> => {
-	const response = await fetch(`${API_URL}/api/v1/clients`, {
-		headers: {
-			Authorization: `Bearer ${API_TOKEN}`,
-		},
-	});
+	const response = await fetch(CLIENTS_API_URL);
 
 	if (!response.ok) {
 		throw error(response.status);
